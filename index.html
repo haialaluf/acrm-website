@@ -1,601 +1,476 @@
 <!--
 =====================================================================
- Tika — WhatsApp Business CRM marketing site
- Single-page site designed to satisfy Meta's WhatsApp Business
- Management API permission review.
+ delaCRM — WhatsApp Business CRM marketing + legal site
+ Single-page site that satisfies:
+   • Meta WhatsApp Business API review (whatsapp_business_messaging,
+     whatsapp_business_management): public homepage, Privacy Policy,
+     Data Deletion Instructions, and Meta non-affiliation notice.
+   • Google OAuth verification: public homepage + Privacy Policy that
+     discloses Google user data use and Limited Use compliance.
 
- PLACEHOLDERS — find & replace before publishing:
-   Tika       Product / company display name
-   HaiTech         Legal entity name (e.g., "YourBrand Technologies Ltd.")
-   Israel         Country of registration (e.g., "Israel")
-   Tel Aviv, Israel         Full registered business address
-   contact@tika-ai.com           Primary support/privacy email
-   contact@tika-ai.com       Data protection officer / privacy email (can equal contact@tika-ai.com)
-   https://acrm.tika-ai.com/         Final public URL (e.g., "https://yourbrand.com")
-   10/05/2026  e.g., "May 11, 2026"
- =====================================================================
+ Legal entity details kept as-is:
+   HaiTech · Tel Aviv, Israel · contact@tika-ai.com
+=====================================================================
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="icon" type="image/png" href="logo.png" />
-<title>Tika — Automate WhatsApp Marketing & Customer Conversations</title>
-<meta name="description" content="Tika is a WhatsApp Business CRM that helps companies automate marketing messages, manage customer conversations, and deliver personalized experiences at scale." />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>delaCRM — WhatsApp Business CRM for marketing, sales &amp; support</title>
+<meta name="description" content="delaCRM is a WhatsApp Business CRM that helps teams run broadcasts, automate replies, and manage every customer conversation from one delightfully simple inbox." />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+<meta name="theme-color" content="#2EA84E" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --green:#16a34a;
-    --green-600:#15803d;
-    --green-50:#ecfdf5;
-    --ink:#0f172a;
-    --ink-2:#334155;
-    --muted:#64748b;
-    --line:#e5e7eb;
-    --bg:#ffffff;
-    --bg-soft:#f8fafc;
-    --cream:#fefce8;
-    --radius:14px;
-  }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{
-    margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif;
-    color:var(--ink);
-    background:var(--bg);
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:var(--green-600);text-decoration:none}
-  a:hover{text-decoration:underline}
-  .container{max-width:1140px;margin:0 auto;padding:0 24px}
-
-  /* ---------- Nav ---------- */
-  header.nav{
-    position:sticky;top:0;z-index:50;
-    background:rgba(255,255,255,.9);
-    backdrop-filter:saturate(180%) blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;color:var(--ink)}
-  .logo-mark{
-    width:32px;height:32px;border-radius:8px;background:var(--green);
-    display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:900;
-  }
-  .nav-links{display:flex;gap:28px}
-  .nav-links a{color:var(--ink-2);font-weight:500;font-size:15px}
-  .nav-cta{display:flex;gap:10px}
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;
-    padding:10px 18px;border-radius:999px;font-weight:600;font-size:15px;
-    border:1px solid transparent;cursor:pointer;transition:all .15s ease;
-  }
-  .btn-outline{border-color:var(--ink);color:var(--ink);background:#fff}
-  .btn-outline:hover{background:var(--ink);color:#fff;text-decoration:none}
-  .btn-primary{background:var(--green);color:#fff}
-  .btn-primary:hover{background:var(--green-600);text-decoration:none}
-  @media (max-width:760px){ .nav-links{display:none} }
-
-  /* ---------- Hero ---------- */
-  .hero{padding:80px 0 60px}
-  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
-  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr} }
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:8px;
-    background:var(--green-50);color:var(--green-600);
-    border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;
-    margin-bottom:18px;
-  }
-  h1{font-size:54px;line-height:1.05;margin:0 0 18px;letter-spacing:-0.02em;font-weight:800}
-  @media (max-width:760px){ h1{font-size:38px} }
-  .lede{font-size:18px;color:var(--ink-2);max-width:540px;margin:0 0 26px}
-  .bullets{list-style:none;padding:0;margin:0 0 30px;display:grid;gap:12px}
-  .bullets li{display:flex;gap:10px;align-items:flex-start;font-size:16px;color:var(--ink-2)}
-  .check{
-    flex:0 0 22px;height:22px;border-radius:50%;background:var(--green);color:#fff;
-    display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-top:2px;
-  }
-  .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
-
-  /* phone mock */
-  .phone-wrap{display:flex;justify-content:center}
-  .phone{
-    width:300px;background:#eaf6ff;border-radius:30px;padding:18px 14px 26px;
-    box-shadow:0 30px 60px -20px rgba(15,23,42,.25);
-    border:1px solid #d6eafe;
-  }
-  .phone-header{display:flex;align-items:center;gap:10px;padding:6px 8px 14px;border-bottom:1px solid #e2effb}
-  .avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#fda4af,#fb923c)}
-  .phone-header .name{font-weight:700;font-size:14px}
-  .phone-header .sub{font-size:11px;color:var(--muted)}
-  .msg{max-width:80%;padding:10px 12px;border-radius:14px;font-size:13px;margin:10px 0;line-height:1.4}
-  .msg.in{background:#dcfce7;border-top-left-radius:4px}
-  .msg.out{background:#fef9c3;margin-left:auto;border-top-right-radius:4px}
-  .quick{display:flex;gap:8px;margin-top:6px}
-  .quick span{flex:1;text-align:center;padding:8px;background:#fff;border-radius:10px;font-size:12px;font-weight:600;color:var(--green-600);border:1px solid #d1fae5}
-
-  /* ---------- Logos / Trust ---------- */
-  .trust{background:var(--cream);padding:48px 0;margin-top:20px;border-radius:18px}
-  .trust h3{text-align:center;margin:0 0 28px;font-size:22px;font-weight:700}
-  .trust-row{display:flex;flex-wrap:wrap;gap:36px;justify-content:center;align-items:center;opacity:.75}
-  .trust-row span{font-family:Georgia,serif;font-weight:700;color:var(--ink-2);font-size:22px;letter-spacing:.04em}
-
-  /* ---------- Sections ---------- */
-  section{padding:80px 0}
-  .section-title{text-align:center;max-width:680px;margin:0 auto 50px}
-  .section-title h2{font-size:38px;line-height:1.15;margin:0 0 14px;letter-spacing:-.01em}
-  .section-title p{color:var(--muted);font-size:17px;margin:0}
-
-  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  @media (max-width:900px){ .features{grid-template-columns:1fr} }
-  .feature{
-    padding:28px;border:1px solid var(--line);border-radius:var(--radius);
-    background:#fff;transition:transform .15s ease,box-shadow .15s ease;
-  }
-  .feature:hover{transform:translateY(-2px);box-shadow:0 12px 28px -16px rgba(15,23,42,.18)}
-  .feature .icon{
-    width:44px;height:44px;border-radius:10px;background:var(--green-50);
-    color:var(--green-600);display:inline-flex;align-items:center;justify-content:center;
-    font-size:22px;font-weight:800;margin-bottom:16px;
-  }
-  .feature h3{margin:0 0 8px;font-size:18px}
-  .feature p{margin:0;color:var(--ink-2);font-size:15px}
-
-  /* How it works */
-  .how{background:var(--bg-soft)}
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  @media (max-width:900px){ .steps{grid-template-columns:1fr} }
-  .step{padding:28px;background:#fff;border-radius:var(--radius);border:1px solid var(--line)}
-  .step .num{
-    width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;
-    display:inline-flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:14px;
-  }
-  .step h3{margin:0 0 6px;font-size:18px}
-  .step p{margin:0;color:var(--ink-2);font-size:15px}
-
-  /* CTA band */
-  .cta-band{
-    margin:60px 0;background:linear-gradient(135deg,#0f172a,#1e293b);
-    border-radius:20px;padding:48px;text-align:center;color:#fff;
-  }
-  .cta-band h2{margin:0 0 12px;font-size:30px}
-  .cta-band p{margin:0 0 24px;color:#cbd5e1;font-size:17px}
-
-  /* ---------- Legal sections ---------- */
-  .legal{background:var(--bg-soft);padding:80px 0}
-  .legal-wrap{max-width:880px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:48px}
-  .legal h2{font-size:32px;margin:0 0 8px;letter-spacing:-.01em}
-  .legal .updated{color:var(--muted);font-size:14px;margin-bottom:24px}
-  .legal h3{margin-top:32px;font-size:18px}
-  .legal h4{margin-top:22px;font-size:16px}
-  .legal p, .legal li{color:var(--ink-2);font-size:15.5px}
-  .legal ul{padding-left:22px}
-  .legal a{color:var(--green-600);text-decoration:underline}
-  .toc{background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:18px 0 28px}
-  .toc strong{display:block;margin-bottom:8px;color:var(--ink)}
-  .toc ol{margin:0;padding-left:20px;columns:2}
-  @media (max-width:700px){ .toc ol{columns:1} .legal-wrap{padding:28px} }
-
-  /* Data deletion call-out */
-  .deletion{border-left:4px solid var(--green);background:var(--green-50);padding:18px 22px;border-radius:8px;margin:20px 0}
-  .deletion strong{color:var(--green-600)}
-
-  /* ---------- Footer ---------- */
-  footer{background:#0f172a;color:#cbd5e1;padding:48px 0 32px;margin-top:40px}
-  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
-  @media (max-width:760px){ .foot-grid{grid-template-columns:1fr 1fr} }
-  footer h4{color:#fff;font-size:14px;text-transform:uppercase;letter-spacing:.08em;margin:0 0 14px}
-  footer a{color:#cbd5e1;display:block;padding:4px 0;font-size:14px}
-  footer a:hover{color:#fff}
-  .foot-bottom{border-top:1px solid #1e293b;margin-top:36px;padding-top:20px;font-size:13px;color:#94a3b8;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  body{margin:0}
+  @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+  /* interaction states (converted from the design's style-hover) */
+  .btn-acc{transition:all .15s;}
+  .btn-acc:hover{background:var(--accent-d,#1E8F3E)!important;}
+  .lift1:hover{transform:translateY(-1px);}
+  .lift2:hover{transform:translateY(-2px);}
+  .lnk-outline{transition:all .15s;}
+  .lnk-outline:hover{border-color:#233642!important;background:#233642!important;color:#fff!important;}
+  .lnk-outline2{transition:all .15s;}
+  .lnk-outline2:hover{border-color:#233642!important;}
+  .card-lift{transition:transform .18s, box-shadow .18s;}
+  .card-lift:hover{transform:translateY(-4px);box-shadow:0 18px 40px -24px rgba(35,54,66,.28);}
 </style>
 </head>
 <body>
 
-<!-- ================== NAV ================== -->
-<header class="nav">
-  <div class="container nav-inner">
-    <a href="#top" class="logo">
-      <span class="logo-mark">B</span>
-      Tika
-    </a>
-    <nav class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#how">How it works</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#privacy">Privacy</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="nav-cta">
-      <a href="#contact" class="btn btn-outline">Book demo</a>
-      <a href="https://acrm-app.tika-ai.com" class="btn btn-primary">Get started</a>
-    </div>
-  </div>
-</header>
+<div style="--accent:#2EA84E; --accent-d:color-mix(in srgb, var(--accent,#2EA84E) 80%, #000); --accent-50:color-mix(in srgb, var(--accent,#2EA84E) 11%, #fff); font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; color:#233642; background:#FCFBF7; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;">
 
-<section id="features">
-  <div class="container">
-    <div class="section-title">
-      <h2>Everything you need to grow on WhatsApp</h2>
-      <p>From bulk campaigns to one-to-one conversations, Tika gives your team the tools to scale customer communication responsibly.</p>
-    </div>
-
-    <div class="features">
-      <div class="feature">
-        <div class="icon">📣</div>
-        <h3>Broadcast campaigns</h3>
-        <p>Send approved template messages to opted-in customers, segment audiences, and track delivery, read &amp; reply rates.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">🤖</div>
-        <h3>No-code automations</h3>
-        <p>Build chatbots and drip workflows that qualify leads, answer FAQs, and route conversations to the right agent.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">👥</div>
-        <h3>Shared team inbox</h3>
-        <p>A multi-agent inbox with assignments, internal notes, labels, and SLAs — purpose-built for WhatsApp.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">🔌</div>
-        <h3>CRM &amp; e-commerce integrations</h3>
-        <p>Connect Shopify, HubSpot, Salesforce, Zapier, and your own systems via our REST API and webhooks.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">📊</div>
-        <h3>Analytics &amp; reporting</h3>
-        <p>Track campaign ROI, agent performance, and customer journey metrics in real time.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">🔒</div>
-        <h3>Enterprise-grade security</h3>
-        <p>End-to-end encryption in transit, role-based access controls, and full audit logs of every action.</p>
+  <!-- ================== NAV ================== -->
+  <header style="position:sticky; top:0; z-index:50; background:rgba(252,251,247,.82); backdrop-filter:saturate(160%) blur(10px); border-bottom:1px solid #ECE6D8;">
+    <div style="max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; height:74px;">
+      <a href="#top" style="display:flex; align-items:center; gap:11px; text-decoration:none;">
+        <img src="assets/delacrm-mark.png" alt="delaCRM" style="width:38px; height:38px; object-fit:contain;" />
+        <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:23px; letter-spacing:-.02em; color:#233642;">dela<span style="color:var(--accent,#2EA84E);">CRM</span></span>
+      </a>
+      <nav style="display:flex; gap:30px; align-items:center;">
+        <a href="#features" style="color:#41535D; font-weight:500; font-size:15px; text-decoration:none;">Features</a>
+        <a href="#how" style="color:#41535D; font-weight:500; font-size:15px; text-decoration:none;">How it works</a>
+        <a href="#pricing" style="color:#41535D; font-weight:500; font-size:15px; text-decoration:none;">Pricing</a>
+        <a href="#privacy" style="color:#41535D; font-weight:500; font-size:15px; text-decoration:none;">Privacy</a>
+        <a href="#contact" style="color:#41535D; font-weight:500; font-size:15px; text-decoration:none;">Contact</a>
+      </nav>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <a href="#contact" class="lnk-outline" style="display:inline-flex; align-items:center; padding:10px 18px; border-radius:999px; font-weight:600; font-size:15px; border:1.5px solid #D8D2C4; color:#233642; background:#fff; text-decoration:none;">Book demo</a>
+        <a href="https://acrm-app.tika-ai.com" class="btn-acc lift1" style="display:inline-flex; align-items:center; padding:11px 20px; border-radius:999px; font-weight:700; font-family:'Bricolage Grotesque',sans-serif; font-size:15px; background:var(--accent,#2EA84E); color:#fff; text-decoration:none; box-shadow:0 8px 20px -8px rgba(46,168,78,.65);">Get started</a>
       </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- ================== HOW IT WORKS ================== -->
-<section id="how" class="how">
-  <div class="container">
-    <div class="section-title">
-      <h2>Get started in three steps</h2>
-      <p>Most teams go live on WhatsApp Business API with Tika in less than a week.</p>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <div class="num">1</div>
-        <h3>Connect your number</h3>
-        <p>We help you register a WhatsApp Business number and verify your business with Meta.</p>
-      </div>
-      <div class="step">
-        <div class="num">2</div>
-        <h3>Import contacts &amp; templates</h3>
-        <p>Bring over your opted-in audience and design Meta-approved message templates.</p>
-      </div>
-      <div class="step">
-        <div class="num">3</div>
-        <h3>Launch &amp; measure</h3>
-        <p>Start broadcasts, automations, and one-to-one conversations — and watch results in real time.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================== PRICING TEASER ================== -->
-<section id="pricing">
-  <div class="container">
-    <div class="cta-band">
-      <h2>See Tika live in a 20-minute demo</h2>
-      <p>We'll walk you through campaigns, automations, and the team inbox — and answer any questions about Meta approval.</p>
-      <a href="#contact" class="btn btn-primary">Book your demo</a>
-    </div>
-  </div>
-</section>
-
-<!-- ================== PRIVACY POLICY ================== -->
-<section id="privacy" class="legal">
-  <div class="container">
-    <div class="legal-wrap">
-      <h2>Privacy Policy</h2>
-      <p class="updated">Last updated: 10/05/2026</p>
-
-      <p>
-        This Privacy Policy explains how HaiTech ("<strong>Tika</strong>", "we", "us" or "our")
-        collects, uses, shares, and protects information when you visit https://acrm.tika-ai.com/, use our WhatsApp
-        Business CRM platform (the "Service"), or otherwise interact with us. By using the Service
-        you agree to the practices described below.
-      </p>
-
-      <div class="toc">
-        <strong>Contents</strong>
-        <ol>
-          <li><a href="#p-who">Who we are</a></li>
-          <li><a href="#p-data">Information we collect</a></li>
-          <li><a href="#p-use">How we use information</a></li>
-          <li><a href="#p-legal">Legal basis (GDPR)</a></li>
-          <li><a href="#p-share">How we share information</a></li>
-          <li><a href="#p-meta">WhatsApp &amp; Meta platform data</a></li>
-          <li><a href="#p-retention">Data retention</a></li>
-          <li><a href="#p-security">Security</a></li>
-          <li><a href="#p-rights">Your rights</a></li>
-          <li><a href="#p-intl">International transfers</a></li>
-          <li><a href="#p-children">Children's privacy</a></li>
-          <li><a href="#p-changes">Changes to this policy</a></li>
-          <li><a href="#p-contact">Contact us</a></li>
-        </ol>
-      </div>
-
-      <h3 id="p-who">1. Who we are</h3>
-      <p>
-        HaiTech, a company registered in Israel with its principal place of business at Tel Aviv, Israel,
-        is the data controller of personal information collected through our website and Service,
-        except where we act as a data processor on behalf of our business customers (see Section 6).
-      </p>
-
-      <h3 id="p-data">2. Information we collect</h3>
-      <p>We collect the following categories of information:</p>
-      <h4>a) Information you provide to us</h4>
-      <ul>
-        <li><strong>Account information:</strong> name, business name, email, phone number, password, billing details.</li>
-        <li><strong>Communications:</strong> messages you send to support, demo requests, survey responses.</li>
-        <li><strong>Business content:</strong> contacts, message templates, campaign content, and conversation data that you or your customers send through the Service.</li>
-      </ul>
-      <h4>b) Information collected automatically</h4>
-      <ul>
-        <li><strong>Usage data:</strong> pages viewed, features used, clicks, timestamps, referring URLs.</li>
-        <li><strong>Device data:</strong> IP address, browser type, operating system, device identifiers.</li>
-        <li><strong>Cookies and similar technologies:</strong> session cookies, authentication tokens, and limited analytics cookies. You can control cookies through your browser settings.</li>
-      </ul>
-      <h4>c) Information from WhatsApp / Meta</h4>
-      <ul>
-        <li>WhatsApp Business Account ID, phone number ID, display name, message-status webhooks, and delivery/read receipts that Meta sends to us when your customers interact with you over WhatsApp.</li>
-        <li>The content of messages exchanged between you and your end-customers via WhatsApp, which we process on your behalf to deliver the Service.</li>
-      </ul>
-
-      <h3 id="p-use">3. How we use information</h3>
-      <ul>
-        <li>To provide, operate, and improve the Service.</li>
-        <li>To send and receive WhatsApp messages on behalf of our business customers.</li>
-        <li>To authenticate users, prevent fraud, and secure the Service.</li>
-        <li>To provide customer support and respond to inquiries.</li>
-        <li>To send service-related communications (e.g., billing, security alerts, product updates).</li>
-        <li>To comply with legal obligations and enforce our Terms of Service.</li>
-        <li>To send marketing communications about Tika, where permitted — you can opt out at any time.</li>
-      </ul>
-      <p>We do <strong>not</strong> sell personal information, and we do not use WhatsApp message content for advertising.</p>
-
-      <h3 id="p-legal">4. Legal basis for processing (GDPR / UK GDPR)</h3>
-      <p>Where the GDPR or UK GDPR applies, we rely on the following legal bases:</p>
-      <ul>
-        <li><strong>Performance of a contract</strong> — to provide the Service you have signed up for.</li>
-        <li><strong>Legitimate interests</strong> — to secure, improve, and market our Service in ways that do not override your rights.</li>
-        <li><strong>Consent</strong> — for optional cookies, marketing emails, and where required by law.</li>
-        <li><strong>Legal obligation</strong> — to comply with applicable laws (tax, accounting, law enforcement requests).</li>
-      </ul>
-
-      <h3 id="p-share">5. How we share information</h3>
-      <p>We share personal information only as described below:</p>
-      <ul>
-        <li><strong>Service providers / sub-processors:</strong> cloud hosting, analytics, email delivery, payment processing, and customer support tools that act on our instructions under written data-processing agreements.</li>
-        <li><strong>Meta Platforms, Inc. and WhatsApp Ireland Ltd.:</strong> as required to deliver WhatsApp messages and operate the WhatsApp Business API.</li>
-        <li><strong>Our business customers:</strong> if you message a business that uses Tika, your messages, phone number, and profile information will be visible to that business, which is the controller of that conversation.</li>
-        <li><strong>Legal &amp; safety:</strong> to comply with legal process, enforce our terms, or protect rights, property, or safety.</li>
-        <li><strong>Corporate transactions:</strong> in connection with a merger, acquisition, or sale of assets, subject to standard confidentiality obligations.</li>
-      </ul>
-
-      <h3 id="p-meta">6. WhatsApp &amp; Meta platform data</h3>
-      <p>
-        Tika is built on top of the WhatsApp Business Platform provided by Meta. When you use
-        the Service to message your customers:
-      </p>
-      <ul>
-        <li>We act as a <strong>data processor</strong> for our business customers with respect to the contact lists and message content they send through the Service.</li>
-        <li>Messages sent via WhatsApp are subject to <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener">WhatsApp's Privacy Policy</a> and <a href="https://www.whatsapp.com/legal/business-policy" target="_blank" rel="noopener">WhatsApp Business Messaging Policy</a>.</li>
-        <li>We only send marketing or promotional messages to end-users who have given their prior opt-in consent to the business sending the message.</li>
-        <li>We do not use Meta platform data for any purpose other than providing the Service, and we do not transfer Meta platform data to data brokers, ad networks, or other third parties for advertising or marketing purposes.</li>
-      </ul>
-
-      <h3 id="p-retention">7. Data retention</h3>
-      <p>
-        We retain personal information for as long as necessary to provide the Service, comply with
-        our legal obligations, resolve disputes, and enforce our agreements. WhatsApp conversation
-        data is retained for the duration of your subscription plus a short backup period of up to
-        90 days, after which it is permanently deleted, unless a longer period is required by law.
-        Account data is deleted within 30 days of an account closure or deletion request, subject
-        to the exceptions described in Section 9.
-      </p>
-
-      <h3 id="p-security">8. Security</h3>
-      <p>
-        We protect personal information using a combination of administrative, technical, and
-        physical safeguards, including encryption in transit (TLS), encryption at rest for sensitive
-        fields, strict access controls based on the principle of least privilege, regular security
-        testing, and continuous monitoring. No system is 100% secure; if you believe your account
-        has been compromised, please contact us immediately at <a href="mailto:contact@tika-ai.com">contact@tika-ai.com</a>.
-      </p>
-
-      <h3 id="p-rights">9. Your rights</h3>
-      <p>Depending on where you live, you may have the right to:</p>
-      <ul>
-        <li>Access the personal information we hold about you.</li>
-        <li>Correct information that is inaccurate or incomplete.</li>
-        <li>Delete your personal information (see also <a href="#data-deletion">Data Deletion Instructions</a> below).</li>
-        <li>Restrict or object to certain processing activities.</li>
-        <li>Receive your information in a portable format.</li>
-        <li>Withdraw consent at any time where processing is based on consent.</li>
-        <li>Lodge a complaint with your local data protection authority.</li>
-      </ul>
-      <p>
-        To exercise any of these rights, contact us at <a href="mailto:contact@tika-ai.com">contact@tika-ai.com</a>.
-        We will respond within the timeframes required by applicable law (typically within 30 days).
-      </p>
-
-      <h3 id="p-intl">10. International data transfers</h3>
-      <p>
-        We may transfer personal information to countries other than the one in which you reside,
-        including to the United States and India where some of our service providers and sub-processors
-        are located. Where required, we rely on appropriate safeguards such as the European Commission's
-        Standard Contractual Clauses to protect your information.
-      </p>
-
-      <h3 id="p-children">11. Children's privacy</h3>
-      <p>
-        The Service is intended for businesses and is not directed at children under 16. We do not
-        knowingly collect personal information from children. If you believe a child has provided us
-        with personal information, please contact us and we will delete it.
-      </p>
-
-      <h3 id="p-changes">12. Changes to this policy</h3>
-      <p>
-        We may update this Privacy Policy from time to time. When we make material changes, we will
-        notify you by email or by prominent notice in the Service before the changes take effect.
-        The "Last updated" date at the top of this policy reflects the most recent revision.
-      </p>
-
-      <h3 id="p-contact">13. Contact us</h3>
-      <p>
-        If you have any questions about this Privacy Policy or our data practices, contact us at:
-      </p>
-      <p>
-        <strong>HaiTech</strong><br/>
-        Attn: Privacy / Data Protection Officer<br/>
-        Tel Aviv, Israel<br/>
-        Email: <a href="mailto:contact@tika-ai.com">contact@tika-ai.com</a><br/>
-        General support: <a href="mailto:contact@tika-ai.com">contact@tika-ai.com</a>
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ================== DATA DELETION INSTRUCTIONS ================== -->
-<section id="data-deletion" class="legal" style="padding-top:0">
-  <div class="container">
-    <div class="legal-wrap">
-      <h2>Data Deletion Instructions</h2>
-      <p class="updated">Last updated: 10/05/2026</p>
-
-      <p>
-        Tika respects your right to control your personal information. This page explains
-        how to request deletion of the data we hold about you, in accordance with the WhatsApp
-        Business Platform requirements and applicable privacy laws (including the GDPR and CCPA).
-      </p>
-
-      <div class="deletion">
-        <strong>Quick request:</strong> Email <a href="mailto:contact@tika-ai.com?subject=Data%20Deletion%20Request">contact@tika-ai.com</a>
-        with the subject line "<em>Data Deletion Request</em>" and we will permanently delete your
-        data within 30 days.
-      </div>
-
-      <h3>Who can request deletion?</h3>
-      <ul>
-        <li><strong>Tika account holders</strong> — businesses with a Tika account.</li>
-        <li><strong>End-customers</strong> who have exchanged WhatsApp messages with a business that uses Tika.</li>
-      </ul>
-
-      <h3>What information to include in your request</h3>
-      <ul>
-        <li>The WhatsApp phone number(s) the request relates to.</li>
-        <li>The name of the business you messaged (if you are an end-customer).</li>
-        <li>A short description of what you want deleted (account, messages, contacts, all data, etc.).</li>
-        <li>An email address we can use to confirm your identity and reply to.</li>
-      </ul>
-
-      <h3>How to submit a request</h3>
-      <p>You can submit a deletion request using any of the following channels:</p>
-      <ol>
-        <li><strong>Email:</strong> Send your request to <a href="mailto:contact@tika-ai.com?subject=Data%20Deletion%20Request">contact@tika-ai.com</a> with the subject "Data Deletion Request".</li>
-        <li><strong>In-app (account holders):</strong> Sign in to your Tika dashboard → <em>Settings → Account → Delete account</em>. This will trigger permanent deletion of your workspace and all associated data.</li>
-        <li><strong>Postal mail:</strong> HaiTech, Attn: Data Protection Officer, Tel Aviv, Israel.</li>
-      </ol>
-
-      <h3>What happens next</h3>
-      <ol>
-        <li>We acknowledge your request within <strong>3 business days</strong>.</li>
-        <li>We verify your identity (we may ask you to confirm from the email associated with the account or the WhatsApp number).</li>
-        <li>We permanently delete your personal information from our active systems within <strong>30 days</strong> of verification, and from backups within an additional <strong>90 days</strong>.</li>
-        <li>We send you a written confirmation once deletion is complete.</li>
-      </ol>
-
-      <h3>Information we may retain</h3>
-      <p>
-        We may retain a limited amount of information after deletion if required to comply with
-        legal obligations (e.g., tax and accounting records), resolve disputes, prevent fraud and
-        abuse, or enforce our Terms of Service. Any such retained information is kept securely and
-        for the minimum period required by law.
-      </p>
-
-      <h3>If you messaged a business that uses Tika</h3>
-      <p>
-        Where a business is the controller of the conversation, we will forward your deletion
-        request to that business and assist them in honoring it. You may also contact the business
-        directly. To stop receiving WhatsApp messages from a business at any time, reply
-        <strong>STOP</strong> to any of its messages — this is the fastest way to opt out.
-      </p>
-
-      <h3>Questions</h3>
-      <p>
-        For any questions about this process, email
-        <a href="mailto:contact@tika-ai.com">contact@tika-ai.com</a>.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ================== CONTACT ================== -->
-<section id="contact" style="padding-top:40px">
-  <div class="container">
-    <div class="section-title">
-      <h2>Get in touch</h2>
-      <p>We'd love to show you what Tika can do for your business.</p>
-    </div>
-    <div style="max-width:520px;margin:0 auto;text-align:center;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);padding:32px">
-      <p style="margin:0 0 6px"><strong>Email:</strong> <a href="mailto:contact@tika-ai.com">contact@tika-ai.com</a></p>
-      <p style="margin:0 0 6px"><strong>Address:</strong> Tel Aviv, Israel</p>
-      <p style="margin:0 0 20px"><strong>Company:</strong> HaiTech, registered in Israel</p>
-      <a href="mailto:contact@tika-ai.com?subject=Demo%20request" class="btn btn-primary">Request a demo</a>
-    </div>
-  </div>
-</section>
-
-<!-- ================== FOOTER ================== -->
-<footer>
-  <div class="container">
-    <div class="foot-grid">
-      <div>
-        <div class="logo" style="color:#fff;margin-bottom:14px">
-          <span class="logo-mark">B</span>
-          Tika
+  <!-- ================== HERO ================== -->
+  <section id="top" style="padding:clamp(48px,7vw,84px) 0 clamp(40px,6vw,64px);">
+    <div style="max-width:1140px; margin:0 auto; padding:0 24px; display:flex; flex-wrap:wrap; gap:clamp(32px,5vw,56px); align-items:center;">
+      <div style="flex:1 1 440px;">
+        <span style="display:inline-flex; align-items:center; gap:8px; background:var(--accent-50,#EAF7EC); color:var(--accent-d,#1E8F3E); border-radius:999px; padding:7px 14px; font-size:13px; font-weight:600; margin-bottom:20px;">
+          <span style="width:7px; height:7px; border-radius:50%; background:var(--accent,#2EA84E); display:inline-block;"></span>
+          WhatsApp Business CRM
+        </span>
+        <h1 style="font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(36px,5.2vw,58px); line-height:1.04; margin:0 0 20px; letter-spacing:-.025em; font-weight:800; color:#233642; text-wrap:balance;">Turn WhatsApp into your sweetest sales channel</h1>
+        <p style="font-size:clamp(17px,2vw,19px); color:#41535D; max-width:540px; margin:0 0 28px;">delaCRM helps your team run broadcasts, automate replies, and manage every customer conversation on WhatsApp — all from one delightfully simple inbox.</p>
+        <ul style="list-style:none; padding:0; margin:0 0 32px; display:grid; gap:13px;">
+          <li style="display:flex; gap:11px; align-items:flex-start; font-size:16px; color:#41535D;"><span style="flex:0 0 23px; height:23px; border-radius:50%; background:var(--accent-50,#EAF7EC); color:var(--accent-d,#1E8F3E); display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; margin-top:1px;">✓</span> Built on the official WhatsApp Business API</li>
+          <li style="display:flex; gap:11px; align-items:flex-start; font-size:16px; color:#41535D;"><span style="flex:0 0 23px; height:23px; border-radius:50%; background:var(--accent-50,#EAF7EC); color:var(--accent-d,#1E8F3E); display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; margin-top:1px;">✓</span> Go live in 10 minutes</li>
+          <li style="display:flex; gap:11px; align-items:flex-start; font-size:16px; color:#41535D;"><span style="flex:0 0 23px; height:23px; border-radius:50%; background:var(--accent-50,#EAF7EC); color:var(--accent-d,#1E8F3E); display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; margin-top:1px;">✓</span> No-code campaigns &amp; automations</li>
+        </ul>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="https://acrm-app.tika-ai.com" class="btn-acc lift2" style="display:inline-flex; align-items:center; padding:14px 26px; border-radius:999px; font-weight:700; font-family:'Bricolage Grotesque',sans-serif; font-size:16px; background:var(--accent,#2EA84E); color:#fff; text-decoration:none; box-shadow:0 12px 26px -10px rgba(46,168,78,.7);">Get started free</a>
+          <a href="#contact" class="lnk-outline2" style="display:inline-flex; align-items:center; padding:14px 26px; border-radius:999px; font-weight:600; font-size:16px; border:1.5px solid #D8D2C4; color:#233642; background:#fff; text-decoration:none;">Book a demo</a>
         </div>
-        <p style="margin:0;max-width:340px">
-          The WhatsApp Business CRM for modern marketing, sales, and support teams.
-        </p>
       </div>
-      <div>
-        <h4>Product</h4>
-        <a href="#features">Features</a>
-        <a href="#how">How it works</a>
-        <a href="#pricing">Pricing</a>
-      </div>
-      <div>
-        <h4>Legal</h4>
-        <a href="#privacy">Privacy Policy</a>
-        <a href="#data-deletion">Data Deletion</a>
-      </div>
-      <div>
-        <h4>Company</h4>
-        <a href="#contact">Contact</a>
-        <a href="mailto:contact@tika-ai.com">contact@tika-ai.com</a>
+
+      <!-- phone mock -->
+      <div style="flex:1 1 320px; display:flex; justify-content:center; position:relative;">
+        <div style="position:absolute; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle at 40% 35%, #FBE9C9, #F4EFE3); filter:blur(8px); z-index:0; animation:floatY 7s ease-in-out infinite;"></div>
+        <div style="position:relative; z-index:1; width:308px; background:#fff; border-radius:34px; padding:16px 14px 22px; box-shadow:0 36px 70px -24px rgba(35,54,66,.34); border:1px solid #EFEADD;">
+          <div style="display:flex; align-items:center; gap:10px; padding:6px 8px 14px; border-bottom:1px solid #F1ECE0;">
+            <div style="width:38px; height:38px; border-radius:50%; background:var(--accent-50,#EAF7EC); display:flex; align-items:center; justify-content:center;"><img src="assets/delacrm-mark.png" alt="" style="width:30px; height:30px; object-fit:contain;" /></div>
+            <div style="line-height:1.2;">
+              <div style="font-weight:700; font-size:14px; color:#233642;">delaCRM</div>
+              <div style="font-size:11px; color:var(--accent-d,#1E8F3E); display:flex; align-items:center; gap:5px;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent,#2EA84E); display:inline-block;"></span>online</div>
+            </div>
+          </div>
+          <div style="padding:6px 4px 0;">
+            <div style="max-width:82%; padding:10px 13px; border-radius:16px; border-top-left-radius:5px; font-size:13px; margin:11px 0; line-height:1.45; background:#F1F8F2; color:#274b32;">Hi there! Thanks for reaching out to Scoops &amp; Co. How can we help?</div>
+            <div style="max-width:82%; margin-left:auto; padding:10px 13px; border-radius:16px; border-top-right-radius:5px; font-size:13px; margin:11px 0 11px auto; line-height:1.45; background:#FBF3DC; color:#5b4b1f;">Do you have any summer deals?</div>
+            <div style="max-width:82%; padding:10px 13px; border-radius:16px; border-top-left-radius:5px; font-size:13px; margin:11px 0; line-height:1.45; background:#F1F8F2; color:#274b32;">Yes! 20% off all orders this week. Want me to send the code?</div>
+            <div style="display:flex; gap:8px; margin-top:12px;">
+              <span style="flex:1; text-align:center; padding:9px; background:#fff; border-radius:12px; font-size:12px; font-weight:600; color:var(--accent-d,#1E8F3E); border:1.5px solid var(--accent-50,#EAF7EC);">Yes please</span>
+              <span style="flex:1; text-align:center; padding:9px; background:#fff; border-radius:12px; font-size:12px; font-weight:600; color:var(--accent-d,#1E8F3E); border:1.5px solid var(--accent-50,#EAF7EC);">View menu</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="foot-bottom">
-      <div>© <span id="yr"></span> HaiTech. All rights reserved.</div>
-      <div>Tika is an independent software provider and is not affiliated with, endorsed by, or sponsored by WhatsApp LLC or Meta Platforms, Inc.</div>
+  </section>
+
+  <!-- ================== FEATURES ================== -->
+  <section id="features" style="padding:clamp(56px,8vw,88px) 0;">
+    <div style="max-width:1140px; margin:0 auto; padding:0 24px;">
+      <div style="text-align:center; max-width:680px; margin:0 auto clamp(40px,5vw,54px);">
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(30px,4vw,40px); line-height:1.12; margin:0 0 14px; letter-spacing:-.02em; color:#233642;">Everything you need to grow on WhatsApp</h2>
+        <p style="color:#74818A; font-size:clamp(16px,2vw,18px); margin:0;">From bulk campaigns to one-to-one conversations, delaCRM gives your team the tools to scale customer communication responsibly.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:22px;">
+
+        <div class="card-lift" style="padding:30px; border:1px solid #ECE6D8; border-radius:22px; background:#fff;">
+          <div style="width:54px; height:54px; border-radius:16px; background:var(--accent-50,#EAF7EC); display:flex; align-items:center; justify-content:center; margin-bottom:18px;">
+            <div style="position:relative; width:26px; height:26px; display:flex; align-items:center; justify-content:center;"><span style="width:9px; height:9px; border-radius:50%; background:var(--accent,#2EA84E);"></span><span style="position:absolute; width:24px; height:24px; border-radius:50%; border:2.5px solid var(--accent,#2EA84E); opacity:.4;"></span></div>
+          </div>
+          <h3 style="margin:0 0 8px; font-size:19px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">Broadcast campaigns</h3>
+          <p style="margin:0; color:#41535D; font-size:15px;">Send approved template messages to opted-in customers, segment audiences, and track delivery, read &amp; reply rates.</p>
+        </div>
+
+        <div class="card-lift" style="padding:30px; border:1px solid #ECE6D8; border-radius:22px; background:#fff;">
+          <div style="width:54px; height:54px; border-radius:16px; background:var(--accent-50,#EAF7EC); display:flex; align-items:center; justify-content:center; margin-bottom:18px;">
+            <div style="position:relative; width:28px; height:24px;"><span style="position:absolute; left:0; top:2px; width:10px; height:10px; border-radius:50%; background:var(--accent,#2EA84E);"></span><span style="position:absolute; right:0; bottom:2px; width:10px; height:10px; border-radius:50%; border:2.5px solid var(--accent,#2EA84E);"></span><span style="position:absolute; left:9px; top:10px; width:11px; height:2.5px; background:var(--accent,#2EA84E); transform:rotate(38deg); transform-origin:left;"></span></div>
+          </div>
+          <h3 style="margin:0 0 8px; font-size:19px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">No-code automations</h3>
+          <p style="margin:0; color:#41535D; font-size:15px;">Build chatbots and drip workflows that qualify leads, answer FAQs, and route conversations to the right agent.</p>
+        </div>
+
+        <div class="card-lift" style="padding:30px; border:1px solid #ECE6D8; border-radius:22px; background:#fff;">
+          <div style="width:54px; height:54px; border-radius:16px; background:var(--accent-50,#EAF7EC); display:flex; align-items:center; justify-content:center; margin-bottom:18px;">
+            <div style="display:flex; flex-direction:column; gap:4px; width:24px;"><span style="height:5px; border-radius:3px; background:var(--accent,#2EA84E);"></span><span style="height:5px; border-radius:3px; background:var(--accent,#2EA84E); opacity:.65;"></span><span style="height:5px; border-radius:3px; background:var(--accent,#2EA84E); opacity:.35;"></span></div>
+          </div>
+          <h3 style="margin:0 0 8px; font-size:19px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">Shared team inbox</h3>
+          <p style="margin:0; color:#41535D; font-size:15px;">A multi-agent inbox with assignments, internal notes, labels, and SLAs — purpose-built for WhatsApp.</p>
+        </div>
+
+        <div class="card-lift" style="padding:30px; border:1px solid #ECE6D8; border-radius:22px; background:#fff;">
+          <div style="width:54px; height:54px; border-radius:16px; background:var(--accent-50,#EAF7EC); display:flex; align-items:center; justify-content:center; margin-bottom:18px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:5px;"><span style="width:9px; height:9px; border-radius:3px; background:var(--accent,#2EA84E);"></span><span style="width:9px; height:9px; border-radius:50%; background:var(--accent,#2EA84E); opacity:.55;"></span><span style="width:9px; height:9px; border-radius:50%; background:var(--accent,#2EA84E); opacity:.55;"></span><span style="width:9px; height:9px; border-radius:3px; background:var(--accent,#2EA84E);"></span></div>
+          </div>
+          <h3 style="margin:0 0 8px; font-size:19px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">CRM &amp; e-commerce integrations</h3>
+          <p style="margin:0; color:#41535D; font-size:15px;">Connect Shopify, HubSpot, Salesforce, Zapier, Google Calendar &amp; Sheets, and your own systems via our REST API and webhooks.</p>
+        </div>
+
+        <div class="card-lift" style="padding:30px; border:1px solid #ECE6D8; border-radius:22px; background:#fff;">
+          <div style="width:54px; height:54px; border-radius:16px; background:var(--accent-50,#EAF7EC); display:flex; align-items:flex-end; justify-content:center; gap:4px; padding-bottom:15px;">
+            <span style="width:5px; height:9px; border-radius:3px; background:var(--accent,#2EA84E); opacity:.45;"></span><span style="width:5px; height:15px; border-radius:3px; background:var(--accent,#2EA84E); opacity:.7;"></span><span style="width:5px; height:22px; border-radius:3px; background:var(--accent,#2EA84E);"></span>
+          </div>
+          <h3 style="margin:0 0 8px; font-size:19px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">Analytics &amp; reporting</h3>
+          <p style="margin:0; color:#41535D; font-size:15px;">Track campaign ROI, agent performance, and customer journey metrics in real time.</p>
+        </div>
+
+        <div class="card-lift" style="padding:30px; border:1px solid #ECE6D8; border-radius:22px; background:#fff;">
+          <div style="width:54px; height:54px; border-radius:16px; background:var(--accent-50,#EAF7EC); display:flex; align-items:center; justify-content:center; margin-bottom:18px;">
+            <div style="width:22px; height:24px; border-radius:7px 7px 9px 9px; border:2.5px solid var(--accent,#2EA84E); display:flex; align-items:center; justify-content:center;"><span style="width:7px; height:7px; border-radius:50%; background:var(--accent,#2EA84E);"></span></div>
+          </div>
+          <h3 style="margin:0 0 8px; font-size:19px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">Enterprise-grade security</h3>
+          <p style="margin:0; color:#41535D; font-size:15px;">End-to-end encryption in transit, role-based access controls, and full audit logs of every action.</p>
+        </div>
+
+      </div>
     </div>
-  </div>
-</footer>
+  </section>
+
+  <!-- ================== HOW IT WORKS ================== -->
+  <section id="how" style="background:#F4EFE3; padding:clamp(56px,8vw,88px) 0;">
+    <div style="max-width:1140px; margin:0 auto; padding:0 24px;">
+      <div style="text-align:center; max-width:680px; margin:0 auto clamp(40px,5vw,54px);">
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(30px,4vw,40px); line-height:1.12; margin:0 0 14px; letter-spacing:-.02em; color:#233642;">Get started in three steps</h2>
+        <p style="color:#74818A; font-size:clamp(16px,2vw,18px); margin:0;">Most teams go live on the WhatsApp Business API with delaCRM in about 10 minutes.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px;">
+        <div style="padding:30px; background:#fff; border-radius:22px; border:1px solid #ECE6D8;">
+          <div style="width:40px; height:40px; border-radius:50%; background:var(--accent,#2EA84E); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-weight:800; font-family:'Bricolage Grotesque',sans-serif; margin-bottom:16px;">1</div>
+          <h3 style="margin:0 0 7px; font-size:19px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">Connect your number</h3>
+          <p style="margin:0; color:#41535D; font-size:15px;">We help you register a WhatsApp Business number and verify your business with Meta.</p>
+        </div>
+        <div style="padding:30px; background:#fff; border-radius:22px; border:1px solid #ECE6D8;">
+          <div style="width:40px; height:40px; border-radius:50%; background:var(--accent,#2EA84E); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-weight:800; font-family:'Bricolage Grotesque',sans-serif; margin-bottom:16px;">2</div>
+          <h3 style="margin:0 0 7px; font-size:19px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">Import contacts &amp; templates</h3>
+          <p style="margin:0; color:#41535D; font-size:15px;">Bring over your opted-in audience and design Meta-approved message templates.</p>
+        </div>
+        <div style="padding:30px; background:#fff; border-radius:22px; border:1px solid #ECE6D8;">
+          <div style="width:40px; height:40px; border-radius:50%; background:var(--accent,#2EA84E); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-weight:800; font-family:'Bricolage Grotesque',sans-serif; margin-bottom:16px;">3</div>
+          <h3 style="margin:0 0 7px; font-size:19px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">Launch &amp; measure</h3>
+          <p style="margin:0; color:#41535D; font-size:15px;">Start broadcasts, automations, and one-to-one conversations — and watch results in real time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== PRICING / CTA BAND ================== -->
+  <section id="pricing" style="padding:clamp(56px,8vw,80px) 0;">
+    <div style="max-width:1140px; margin:0 auto; padding:0 24px;">
+      <div style="position:relative; overflow:hidden; background:linear-gradient(135deg, var(--accent,#2EA84E), var(--accent-d,#1E8F3E)); border-radius:28px; padding:clamp(40px,6vw,60px) 32px; text-align:center; color:#fff;">
+        <div style="position:absolute; top:-60px; right:-40px; width:240px; height:240px; border-radius:50%; background:rgba(255,255,255,.10);"></div>
+        <div style="position:absolute; bottom:-80px; left:-30px; width:200px; height:200px; border-radius:50%; background:rgba(255,255,255,.08);"></div>
+        <div style="position:relative;">
+          <h2 style="margin:0 0 12px; font-size:clamp(26px,3.6vw,34px); font-family:'Bricolage Grotesque',sans-serif; letter-spacing:-.02em;">See delaCRM live in a 20-minute demo</h2>
+          <p style="margin:0 0 26px; color:rgba(255,255,255,.9); font-size:clamp(16px,2vw,18px); max-width:580px; margin-left:auto; margin-right:auto;">We'll walk you through campaigns, automations, and the team inbox — and answer any questions about Meta approval.</p>
+          <a href="#contact" class="lift2" style="display:inline-flex; align-items:center; padding:14px 28px; border-radius:999px; font-weight:700; font-family:'Bricolage Grotesque',sans-serif; font-size:16px; background:#fff; color:var(--accent-d,#1E8F3E); text-decoration:none; box-shadow:0 14px 30px -12px rgba(0,0,0,.3); transition:transform .15s;">Book your demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== PRIVACY POLICY ================== -->
+  <section id="privacy" style="background:#F8F5EE; padding:clamp(56px,8vw,80px) 0;">
+    <div style="max-width:1140px; margin:0 auto; padding:0 24px;">
+      <div style="max-width:880px; margin:0 auto; background:#fff; border:1px solid #ECE6D8; border-radius:22px; padding:clamp(28px,5vw,48px); color:#41535D; font-size:15.5px; line-height:1.65;">
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(26px,3.6vw,34px); margin:0 0 8px; letter-spacing:-.02em; color:#233642;">Privacy Policy</h2>
+        <p style="color:#74818A; font-size:14px; margin:0 0 24px;">Last updated: 16/06/2026</p>
+
+        <p style="margin:0 0 16px;">This Privacy Policy explains how HaiTech ("<strong>delaCRM</strong>", "we", "us" or "our") collects, uses, shares, and protects information when you visit our website, use our WhatsApp Business CRM platform (the "Service"), connect optional integrations such as Google, or otherwise interact with us. By using the Service you agree to the practices described below.</p>
+
+        <div style="background:#F8F5EE; border:1px solid #ECE6D8; border-radius:12px; padding:18px 22px; margin:18px 0 28px;">
+          <strong style="display:block; margin-bottom:8px; color:#233642;">Contents</strong>
+          <ol style="margin:0; padding-left:20px; columns:2; column-gap:32px;">
+            <li><a href="#p-who" style="color:var(--accent-d,#1E8F3E);">Who we are</a></li>
+            <li><a href="#p-data" style="color:var(--accent-d,#1E8F3E);">Information we collect</a></li>
+            <li><a href="#p-use" style="color:var(--accent-d,#1E8F3E);">How we use information</a></li>
+            <li><a href="#p-legal" style="color:var(--accent-d,#1E8F3E);">Legal basis (GDPR)</a></li>
+            <li><a href="#p-share" style="color:var(--accent-d,#1E8F3E);">How we share information</a></li>
+            <li><a href="#p-meta" style="color:var(--accent-d,#1E8F3E);">WhatsApp &amp; Meta platform data</a></li>
+            <li><a href="#p-google" style="color:var(--accent-d,#1E8F3E);">Google user data &amp; API Services</a></li>
+            <li><a href="#p-retention" style="color:var(--accent-d,#1E8F3E);">Data retention</a></li>
+            <li><a href="#p-security" style="color:var(--accent-d,#1E8F3E);">Security</a></li>
+            <li><a href="#p-rights" style="color:var(--accent-d,#1E8F3E);">Your rights</a></li>
+            <li><a href="#p-intl" style="color:var(--accent-d,#1E8F3E);">International transfers</a></li>
+            <li><a href="#p-children" style="color:var(--accent-d,#1E8F3E);">Children's privacy</a></li>
+            <li><a href="#p-changes" style="color:var(--accent-d,#1E8F3E);">Changes to this policy</a></li>
+            <li><a href="#p-contact" style="color:var(--accent-d,#1E8F3E);">Contact us</a></li>
+          </ol>
+        </div>
+
+        <h3 id="p-who" style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">1. Who we are</h3>
+        <p style="margin:0 0 16px;">HaiTech, a company registered in Israel with its principal place of business at Tel Aviv, Israel, is the data controller of personal information collected through our website and Service, except where we act as a data processor on behalf of our business customers (see Section 6).</p>
+
+        <h3 id="p-data" style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">2. Information we collect</h3>
+        <p style="margin:0 0 12px;">We collect the following categories of information:</p>
+        <h4 style="margin:22px 0 8px; font-size:16px; color:#233642;">a) Information you provide to us</h4>
+        <ul style="padding-left:22px; margin:0 0 12px;">
+          <li><strong>Account information:</strong> name, business name, email, phone number, password, billing details.</li>
+          <li><strong>Communications:</strong> messages you send to support, demo requests, survey responses.</li>
+          <li><strong>Business content:</strong> contacts, message templates, campaign content, and conversation data that you or your customers send through the Service.</li>
+        </ul>
+        <h4 style="margin:22px 0 8px; font-size:16px; color:#233642;">b) Information collected automatically</h4>
+        <ul style="padding-left:22px; margin:0 0 12px;">
+          <li><strong>Usage data:</strong> pages viewed, features used, clicks, timestamps, referring URLs.</li>
+          <li><strong>Device data:</strong> IP address, browser type, operating system, device identifiers.</li>
+          <li><strong>Cookies and similar technologies:</strong> session cookies, authentication tokens, and limited analytics cookies. You can control cookies through your browser settings.</li>
+        </ul>
+        <h4 style="margin:22px 0 8px; font-size:16px; color:#233642;">c) Information from WhatsApp / Meta</h4>
+        <ul style="padding-left:22px; margin:0 0 12px;">
+          <li>WhatsApp Business Account ID, phone number ID, display name, message-status webhooks, and delivery/read receipts that Meta sends to us when your customers interact with you over WhatsApp.</li>
+          <li>The content of messages exchanged between you and your end-customers via WhatsApp, which we process on your behalf to deliver the Service.</li>
+        </ul>
+        <h4 style="margin:22px 0 8px; font-size:16px; color:#233642;">d) Information from Google (optional integration)</h4>
+        <ul style="padding-left:22px; margin:0 0 12px;">
+          <li>If you choose to connect Google, we receive an OAuth access token and the data needed for the features you enable — your Google Calendar list and events, and the Google Sheets/Drive files you explicitly open or create with the Service. See Section 7 for full details and our Limited Use commitments.</li>
+        </ul>
+
+        <h3 id="p-use" style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">3. How we use information</h3>
+        <ul style="padding-left:22px; margin:0 0 12px;">
+          <li>To provide, operate, and improve the Service.</li>
+          <li>To send and receive WhatsApp messages on behalf of our business customers.</li>
+          <li>To authenticate users, prevent fraud, and secure the Service.</li>
+          <li>To provide customer support and respond to inquiries.</li>
+          <li>To send service-related communications (e.g., billing, security alerts, product updates).</li>
+          <li>To comply with legal obligations and enforce our Terms of Service.</li>
+          <li>To send marketing communications about delaCRM, where permitted — you can opt out at any time.</li>
+        </ul>
+        <p style="margin:0 0 16px;">We do <strong>not</strong> sell personal information, and we do not use WhatsApp message content or Google user data for advertising.</p>
+
+        <h3 id="p-legal" style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">4. Legal basis for processing (GDPR / UK GDPR)</h3>
+        <p style="margin:0 0 12px;">Where the GDPR or UK GDPR applies, we rely on the following legal bases:</p>
+        <ul style="padding-left:22px; margin:0 0 12px;">
+          <li><strong>Performance of a contract</strong> — to provide the Service you have signed up for.</li>
+          <li><strong>Legitimate interests</strong> — to secure, improve, and market our Service in ways that do not override your rights.</li>
+          <li><strong>Consent</strong> — for optional cookies, marketing emails, optional integrations such as Google, and where required by law.</li>
+          <li><strong>Legal obligation</strong> — to comply with applicable laws (tax, accounting, law enforcement requests).</li>
+        </ul>
+
+        <h3 id="p-share" style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">5. How we share information</h3>
+        <p style="margin:0 0 12px;">We share personal information only as described below:</p>
+        <ul style="padding-left:22px; margin:0 0 12px;">
+          <li><strong>Service providers / sub-processors:</strong> cloud hosting, analytics, email delivery, payment processing, and customer support tools that act on our instructions under written data-processing agreements.</li>
+          <li><strong>Meta Platforms, Inc. and WhatsApp Ireland Ltd.:</strong> as required to deliver WhatsApp messages and operate the WhatsApp Business API.</li>
+          <li><strong>Google LLC:</strong> where you connect the Google integration, to authenticate you and call the Google APIs you have authorized. Our use of Google data is also governed by Section 7.</li>
+          <li><strong>Our business customers:</strong> if you message a business that uses delaCRM, your messages, phone number, and profile information will be visible to that business, which is the controller of that conversation.</li>
+          <li><strong>Legal &amp; safety:</strong> to comply with legal process, enforce our terms, or protect rights, property, or safety.</li>
+          <li><strong>Corporate transactions:</strong> in connection with a merger, acquisition, or sale of assets, subject to standard confidentiality obligations.</li>
+        </ul>
+
+        <h3 id="p-meta" style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">6. WhatsApp &amp; Meta platform data</h3>
+        <p style="margin:0 0 12px;">delaCRM is built on top of the WhatsApp Business Platform provided by Meta. When you use the Service to message your customers:</p>
+        <ul style="padding-left:22px; margin:0 0 12px;">
+          <li>We act as a <strong>data processor</strong> for our business customers with respect to the contact lists and message content they send through the Service.</li>
+          <li>Messages sent via WhatsApp are subject to <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener" style="color:var(--accent-d,#1E8F3E);">WhatsApp's Privacy Policy</a> and <a href="https://www.whatsapp.com/legal/business-policy" target="_blank" rel="noopener" style="color:var(--accent-d,#1E8F3E);">WhatsApp Business Messaging Policy</a>.</li>
+          <li>We only send marketing or promotional messages to end-users who have given their prior opt-in consent to the business sending the message.</li>
+          <li>We do not use Meta platform data for any purpose other than providing the Service, and we do not transfer Meta platform data to data brokers, ad networks, or other third parties for advertising or marketing purposes.</li>
+        </ul>
+
+        <h3 id="p-google" style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">7. Google user data and Google API Services</h3>
+        <p style="margin:0 0 12px;">delaCRM offers optional integrations that let you connect your Google account so the Service (and our AI assistant) can manage your Google Calendar and the Google Sheets/Drive files you choose. delaCRM's use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener" style="color:var(--accent-d,#1E8F3E);">Google API Services User Data Policy</a>, including the <strong>Limited Use</strong> requirements.</p>
+        <ul style="padding-left:22px; margin:0 0 12px;">
+          <li><strong>Scopes we request:</strong> Google Calendar — view your calendar list and create, edit, and delete events (<code>calendar.events</code>, <code>calendar.calendarlist.readonly</code>); and Google Drive access limited to the specific files you open or create with the Service (<code>drive.file</code>). We do not request access to your full Drive.</li>
+          <li><strong>How we use it:</strong> solely to provide the calendar and spreadsheet features you request — for example, creating an event or writing to a sheet on your instruction. We do not use Google user data for advertising and we do not sell it.</li>
+          <li><strong>Limited Use:</strong> we only transfer Google user data to others if necessary to provide or improve these features, to comply with applicable law, or as part of a merger or acquisition. We do not allow humans to read your Google data unless (a) you give explicit consent for specific data, e.g., when contacting support; (b) it is necessary for security purposes or to comply with applicable law; or (c) the data has been aggregated and anonymized.</li>
+          <li><strong>Storage &amp; revocation:</strong> Google OAuth tokens are encrypted at rest. You can revoke delaCRM's access at any time from your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener" style="color:var(--accent-d,#1E8F3E);">Google Account permissions</a> page, or by contacting us, after which we delete the associated tokens.</li>
+        </ul>
+
+        <h3 id="p-retention" style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">8. Data retention</h3>
+        <p style="margin:0 0 16px;">We retain personal information for as long as necessary to provide the Service, comply with our legal obligations, resolve disputes, and enforce our agreements. WhatsApp conversation data is retained for the duration of your subscription plus a short backup period of up to 90 days, after which it is permanently deleted, unless a longer period is required by law. Account data is deleted within 30 days of an account closure or deletion request, subject to the exceptions described in Section 10.</p>
+
+        <h3 id="p-security" style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">9. Security</h3>
+        <p style="margin:0 0 16px;">We protect personal information using a combination of administrative, technical, and physical safeguards, including encryption in transit (TLS), encryption at rest for sensitive fields (including OAuth tokens), strict access controls based on the principle of least privilege, regular security testing, and continuous monitoring. No system is 100% secure; if you believe your account has been compromised, please contact us immediately at <a href="mailto:contact@tika-ai.com" style="color:var(--accent-d,#1E8F3E);">contact@tika-ai.com</a>.</p>
+
+        <h3 id="p-rights" style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">10. Your rights</h3>
+        <p style="margin:0 0 12px;">Depending on where you live, you may have the right to:</p>
+        <ul style="padding-left:22px; margin:0 0 12px;">
+          <li>Access the personal information we hold about you.</li>
+          <li>Correct information that is inaccurate or incomplete.</li>
+          <li>Delete your personal information (see also <a href="#data-deletion" style="color:var(--accent-d,#1E8F3E);">Data Deletion Instructions</a> below).</li>
+          <li>Restrict or object to certain processing activities.</li>
+          <li>Receive your information in a portable format.</li>
+          <li>Withdraw consent at any time where processing is based on consent.</li>
+          <li>Lodge a complaint with your local data protection authority.</li>
+        </ul>
+        <p style="margin:0 0 16px;">To exercise any of these rights, contact us at <a href="mailto:contact@tika-ai.com" style="color:var(--accent-d,#1E8F3E);">contact@tika-ai.com</a>. We will respond within the timeframes required by applicable law (typically within 30 days).</p>
+
+        <h3 id="p-intl" style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">11. International data transfers</h3>
+        <p style="margin:0 0 16px;">We may transfer personal information to countries other than the one in which you reside, including to the United States and India where some of our service providers and sub-processors are located. Where required, we rely on appropriate safeguards such as the European Commission's Standard Contractual Clauses to protect your information.</p>
+
+        <h3 id="p-children" style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">12. Children's privacy</h3>
+        <p style="margin:0 0 16px;">The Service is intended for businesses and is not directed at children under 16. We do not knowingly collect personal information from children. If you believe a child has provided us with personal information, please contact us and we will delete it.</p>
+
+        <h3 id="p-changes" style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">13. Changes to this policy</h3>
+        <p style="margin:0 0 16px;">We may update this Privacy Policy from time to time. When we make material changes, we will notify you by email or by prominent notice in the Service before the changes take effect. The "Last updated" date at the top of this policy reflects the most recent revision.</p>
+
+        <h3 id="p-contact" style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">14. Contact us</h3>
+        <p style="margin:0 0 8px;">If you have any questions about this Privacy Policy or our data practices, contact us at:</p>
+        <p style="margin:0 0 16px;"><strong>HaiTech</strong><br/>Attn: Privacy / Data Protection Officer<br/>Tel Aviv, Israel<br/>Email: <a href="mailto:contact@tika-ai.com" style="color:var(--accent-d,#1E8F3E);">contact@tika-ai.com</a><br/>General support: <a href="mailto:contact@tika-ai.com" style="color:var(--accent-d,#1E8F3E);">contact@tika-ai.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== DATA DELETION ================== -->
+  <section id="data-deletion" style="background:#F8F5EE; padding:0 0 clamp(56px,8vw,80px);">
+    <div style="max-width:1140px; margin:0 auto; padding:0 24px;">
+      <div style="max-width:880px; margin:0 auto; background:#fff; border:1px solid #ECE6D8; border-radius:22px; padding:clamp(28px,5vw,48px); color:#41535D; font-size:15.5px; line-height:1.65;">
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(26px,3.6vw,34px); margin:0 0 8px; letter-spacing:-.02em; color:#233642;">Data Deletion Instructions</h2>
+        <p style="color:#74818A; font-size:14px; margin:0 0 24px;">Last updated: 16/06/2026</p>
+
+        <p style="margin:0 0 16px;">delaCRM respects your right to control your personal information. This page explains how to request deletion of the data we hold about you, in accordance with the WhatsApp Business Platform requirements and applicable privacy laws (including the GDPR and CCPA).</p>
+
+        <div style="border-left:4px solid var(--accent,#2EA84E); background:var(--accent-50,#EAF7EC); padding:18px 22px; border-radius:10px; margin:20px 0;">
+          <strong style="color:var(--accent-d,#1E8F3E);">Quick request:</strong> Email <a href="mailto:contact@tika-ai.com?subject=Data%20Deletion%20Request" style="color:var(--accent-d,#1E8F3E);">contact@tika-ai.com</a> with the subject line "<em>Data Deletion Request</em>" and we will permanently delete your data within 30 days.
+        </div>
+
+        <h3 style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">Who can request deletion?</h3>
+        <ul style="padding-left:22px; margin:0 0 12px;">
+          <li><strong>delaCRM account holders</strong> — businesses with a delaCRM account.</li>
+          <li><strong>End-customers</strong> who have exchanged WhatsApp messages with a business that uses delaCRM.</li>
+        </ul>
+
+        <h3 style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">What information to include in your request</h3>
+        <ul style="padding-left:22px; margin:0 0 12px;">
+          <li>The WhatsApp phone number(s) the request relates to.</li>
+          <li>The name of the business you messaged (if you are an end-customer).</li>
+          <li>A short description of what you want deleted (account, messages, contacts, connected Google data, all data, etc.).</li>
+          <li>An email address we can use to confirm your identity and reply to.</li>
+        </ul>
+
+        <h3 style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">How to submit a request</h3>
+        <p style="margin:0 0 12px;">You can submit a deletion request using any of the following channels:</p>
+        <ol style="padding-left:22px; margin:0 0 12px;">
+          <li><strong>Email:</strong> Send your request to <a href="mailto:contact@tika-ai.com?subject=Data%20Deletion%20Request" style="color:var(--accent-d,#1E8F3E);">contact@tika-ai.com</a> with the subject "Data Deletion Request".</li>
+          <li><strong>In-app (account holders):</strong> Sign in to your delaCRM dashboard → <em>Settings → Account → Delete account</em>. This will trigger permanent deletion of your workspace and all associated data.</li>
+          <li><strong>Postal mail:</strong> HaiTech, Attn: Data Protection Officer, Tel Aviv, Israel.</li>
+        </ol>
+
+        <h3 style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">What happens next</h3>
+        <ol style="padding-left:22px; margin:0 0 12px;">
+          <li>We acknowledge your request within <strong>3 business days</strong>.</li>
+          <li>We verify your identity (we may ask you to confirm from the email associated with the account or the WhatsApp number).</li>
+          <li>We permanently delete your personal information from our active systems within <strong>30 days</strong> of verification, and from backups within an additional <strong>90 days</strong>.</li>
+          <li>We send you a written confirmation once deletion is complete.</li>
+        </ol>
+
+        <h3 style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">Revoking connected Google access</h3>
+        <p style="margin:0 0 16px;">If you connected a Google account, you can disconnect it at any time from your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener" style="color:var(--accent-d,#1E8F3E);">Google Account permissions</a> page, or by emailing us. Revoking access deletes the OAuth tokens we hold for your account.</p>
+
+        <h3 style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">Information we may retain</h3>
+        <p style="margin:0 0 16px;">We may retain a limited amount of information after deletion if required to comply with legal obligations (e.g., tax and accounting records), resolve disputes, prevent fraud and abuse, or enforce our Terms of Service. Any such retained information is kept securely and for the minimum period required by law.</p>
+
+        <h3 style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">If you messaged a business that uses delaCRM</h3>
+        <p style="margin:0 0 16px;">Where a business is the controller of the conversation, we will forward your deletion request to that business and assist them in honoring it. You may also contact the business directly. To stop receiving WhatsApp messages from a business at any time, reply <strong>STOP</strong> to any of its messages — this is the fastest way to opt out.</p>
+
+        <h3 style="margin-top:32px; font-size:18px; font-family:'Bricolage Grotesque',sans-serif; color:#233642;">Questions</h3>
+        <p style="margin:0;">For any questions about this process, email <a href="mailto:contact@tika-ai.com" style="color:var(--accent-d,#1E8F3E);">contact@tika-ai.com</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== CONTACT ================== -->
+  <section id="contact" style="padding:clamp(56px,8vw,80px) 0;">
+    <div style="max-width:1140px; margin:0 auto; padding:0 24px;">
+      <div style="text-align:center; max-width:680px; margin:0 auto 40px;">
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(30px,4vw,40px); line-height:1.12; margin:0 0 14px; letter-spacing:-.02em; color:#233642;">Get in touch</h2>
+        <p style="color:#74818A; font-size:clamp(16px,2vw,18px); margin:0;">We'd love to show you what delaCRM can do for your business.</p>
+      </div>
+      <div style="max-width:520px; margin:0 auto; text-align:center; background:#F8F5EE; border:1px solid #ECE6D8; border-radius:22px; padding:36px;">
+        <p style="margin:0 0 8px;"><strong>Email:</strong> <a href="mailto:contact@tika-ai.com" style="color:var(--accent-d,#1E8F3E);">contact@tika-ai.com</a></p>
+        <p style="margin:0 0 8px;"><strong>Address:</strong> Tel Aviv, Israel</p>
+        <p style="margin:0 0 22px;"><strong>Company:</strong> HaiTech, registered in Israel</p>
+        <a href="mailto:contact@tika-ai.com?subject=Demo%20request" class="btn-acc lift2" style="display:inline-flex; align-items:center; padding:13px 26px; border-radius:999px; font-weight:700; font-family:'Bricolage Grotesque',sans-serif; font-size:16px; background:var(--accent,#2EA84E); color:#fff; text-decoration:none; box-shadow:0 12px 26px -10px rgba(46,168,78,.7);">Request a demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== FOOTER ================== -->
+  <footer style="background:#233642; color:#B7C2C9; padding:52px 0 32px; margin-top:20px;">
+    <div style="max-width:1140px; margin:0 auto; padding:0 24px;">
+      <div style="display:flex; flex-wrap:wrap; gap:32px;">
+        <div style="flex:2 1 280px;">
+          <div style="display:flex; align-items:center; gap:11px; margin-bottom:14px;">
+            <img src="assets/delacrm-mark.png" alt="delaCRM" style="width:36px; height:36px; object-fit:contain;" />
+            <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:22px; letter-spacing:-.02em; color:#fff;">dela<span style="color:var(--accent,#2EA84E);">CRM</span></span>
+          </div>
+          <p style="margin:0; max-width:340px; font-size:14.5px; color:#9DAAB2;">The WhatsApp Business CRM for modern marketing, sales, and support teams.</p>
+        </div>
+        <div style="flex:1 1 140px;">
+          <h4 style="color:#fff; font-size:13px; text-transform:uppercase; letter-spacing:.08em; margin:0 0 14px;">Product</h4>
+          <a href="#features" style="color:#B7C2C9; display:block; padding:4px 0; font-size:14px; text-decoration:none;">Features</a>
+          <a href="#how" style="color:#B7C2C9; display:block; padding:4px 0; font-size:14px; text-decoration:none;">How it works</a>
+          <a href="#pricing" style="color:#B7C2C9; display:block; padding:4px 0; font-size:14px; text-decoration:none;">Pricing</a>
+        </div>
+        <div style="flex:1 1 140px;">
+          <h4 style="color:#fff; font-size:13px; text-transform:uppercase; letter-spacing:.08em; margin:0 0 14px;">Legal</h4>
+          <a href="#privacy" style="color:#B7C2C9; display:block; padding:4px 0; font-size:14px; text-decoration:none;">Privacy Policy</a>
+          <a href="#data-deletion" style="color:#B7C2C9; display:block; padding:4px 0; font-size:14px; text-decoration:none;">Data Deletion</a>
+        </div>
+        <div style="flex:1 1 140px;">
+          <h4 style="color:#fff; font-size:13px; text-transform:uppercase; letter-spacing:.08em; margin:0 0 14px;">Company</h4>
+          <a href="#contact" style="color:#B7C2C9; display:block; padding:4px 0; font-size:14px; text-decoration:none;">Contact</a>
+          <a href="mailto:contact@tika-ai.com" style="color:#B7C2C9; display:block; padding:4px 0; font-size:14px; text-decoration:none;">contact@tika-ai.com</a>
+        </div>
+      </div>
+      <div style="border-top:1px solid #34495680; margin-top:36px; padding-top:20px; font-size:13px; color:#7E8C95; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+        <div>© <span id="yr"></span> HaiTech. All rights reserved.</div>
+        <div style="max-width:560px;">delaCRM is an independent software provider and is not affiliated with, endorsed by, or sponsored by WhatsApp LLC or Meta Platforms, Inc.</div>
+      </div>
+    </div>
+  </footer>
+
+</div>
 
 <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
 </body>
