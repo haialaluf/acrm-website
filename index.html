@@ -43,6 +43,30 @@
   .lnk-outline2:hover{border-color:#233642!important;}
   .card-lift{transition:transform .18s, box-shadow .18s;}
   .card-lift:hover{transform:translateY(-4px);box-shadow:0 18px 40px -24px rgba(35,54,66,.28);}
+  /* mobile nav */
+  .nav-toggle{display:none; flex:0 0 auto; width:42px; height:42px; padding:0; border:1.5px solid #D8D2C4; border-radius:12px; background:#fff; cursor:pointer; align-items:center; justify-content:center; gap:4px; flex-direction:column;}
+  .nav-toggle span{display:block; width:18px; height:2px; border-radius:2px; background:#233642;}
+  .mobile-menu{display:none;}
+  @media (max-width:900px){
+    .nav-links{display:none!important;}
+    .cta-demo{display:none!important;}
+    .nav-toggle{display:flex!important;}
+    .nav-bar{height:62px!important; padding:0 16px!important; gap:10px!important;}
+    .nav-logo{font-size:20px!important;}
+    .nav-mark{width:32px!important; height:32px!important;}
+    .nav-cta a{padding:9px 16px!important; font-size:14px!important; white-space:nowrap;}
+    .mobile-menu{display:block; border-top:1px solid #ECE6D8; background:rgba(252,251,247,.97); padding:8px 16px 16px;}
+    .mobile-menu[hidden]{display:none;}
+    .mobile-menu a{display:block; padding:14px 2px; color:#41535D; font-weight:500; font-size:16px; text-decoration:none; border-bottom:1px solid #F1ECE0;}
+    .mobile-menu a.cta-demo{display:inline-flex!important; margin-top:16px; border-bottom:none;}
+  }
+  @media (max-width:360px){
+    .nav-bar{padding:0 12px!important; gap:8px!important;}
+    .nav-logo{font-size:18px!important;}
+    .nav-mark{width:28px!important; height:28px!important;}
+    .nav-cta a{padding:8px 13px!important; font-size:13px!important;}
+    .nav-toggle{width:38px; height:38px;}
+  }
 </style>
 </head>
 <body>
@@ -50,23 +74,32 @@
 <div style="--accent:#2EA84E; --accent-d:color-mix(in srgb, var(--accent,#2EA84E) 80%, #000); --accent-50:color-mix(in srgb, var(--accent,#2EA84E) 11%, #fff); font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; color:#233642; background:#FCFBF7; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;">
 
   <!-- ================== NAV ================== -->
-  <header style="position:sticky; top:0; z-index:50; background:rgba(252,251,247,.82); backdrop-filter:saturate(160%) blur(10px); border-bottom:1px solid #ECE6D8;">
-    <div style="max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; height:74px;">
+  <header id="site-header" style="position:sticky; top:0; z-index:50; background:rgba(252,251,247,.82); backdrop-filter:saturate(160%) blur(10px); border-bottom:1px solid #ECE6D8;">
+    <div class="nav-bar" style="max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; height:74px;">
       <a href="#top" style="display:flex; align-items:center; gap:11px; text-decoration:none;">
-        <img src="assets/delacrm-mark.png" alt="delaCRM" style="width:38px; height:38px; object-fit:contain;" />
-        <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:23px; letter-spacing:-.02em; color:#233642;">dela<span style="color:var(--accent,#2EA84E);">CRM</span></span>
+        <img class="nav-mark" src="assets/delacrm-mark.png" alt="delaCRM" style="width:38px; height:38px; object-fit:contain;" />
+        <span class="nav-logo" style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:23px; letter-spacing:-.02em; color:#233642;">dela<span style="color:var(--accent,#2EA84E);">CRM</span></span>
       </a>
-      <nav style="display:flex; gap:30px; align-items:center;">
+      <nav class="nav-links" style="display:flex; gap:30px; align-items:center;">
         <a href="#features" style="color:#41535D; font-weight:500; font-size:15px; text-decoration:none;">Features</a>
         <a href="#how" style="color:#41535D; font-weight:500; font-size:15px; text-decoration:none;">How it works</a>
         <a href="#pricing" style="color:#41535D; font-weight:500; font-size:15px; text-decoration:none;">Pricing</a>
         <a href="#privacy" style="color:#41535D; font-weight:500; font-size:15px; text-decoration:none;">Privacy</a>
         <a href="#contact" style="color:#41535D; font-weight:500; font-size:15px; text-decoration:none;">Contact</a>
       </nav>
-      <div style="display:flex; gap:10px; align-items:center;">
-        <a href="#contact" class="lnk-outline" style="display:inline-flex; align-items:center; padding:10px 18px; border-radius:999px; font-weight:600; font-size:15px; border:1.5px solid #D8D2C4; color:#233642; background:#fff; text-decoration:none;">Book demo</a>
+      <div class="nav-cta" style="display:flex; gap:10px; align-items:center;">
+        <a href="#contact" class="lnk-outline cta-demo" style="display:inline-flex; align-items:center; padding:10px 18px; border-radius:999px; font-weight:600; font-size:15px; border:1.5px solid #D8D2C4; color:#233642; background:#fff; text-decoration:none;">Book demo</a>
         <a href="https://app.delacrm.com" class="btn-acc lift1" style="display:inline-flex; align-items:center; padding:11px 20px; border-radius:999px; font-weight:700; font-family:'Bricolage Grotesque',sans-serif; font-size:15px; background:var(--accent,#2EA84E); color:#fff; text-decoration:none; box-shadow:0 8px 20px -8px rgba(46,168,78,.65);">Get started</a>
+        <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
       </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu" hidden>
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="lnk-outline cta-demo" style="align-items:center; padding:12px 22px; border-radius:999px; font-weight:600; font-size:15px; border:1.5px solid #D8D2C4; color:#233642; background:#fff; text-decoration:none;">Book demo</a>
     </div>
   </header>
 
@@ -447,6 +480,13 @@
 
 </div>
 
-<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+var navBtn=document.querySelector('.nav-toggle'), navMenu=document.getElementById('mobile-menu');
+function setMenu(open){navMenu.hidden=!open; navBtn.setAttribute('aria-expanded', open?'true':'false');}
+navBtn.addEventListener('click', function(){setMenu(navMenu.hidden);});
+navMenu.addEventListener('click', function(e){if(e.target.closest('a')) setMenu(false);});
+window.addEventListener('resize', function(){if(window.innerWidth>900) setMenu(false);});
+</script>
 </body>
 </html>
