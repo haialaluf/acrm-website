@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 58 800 500" width="800" height="500" role="img" aria-label="A hand holding a phone in low light, recording a voice note, the waveform lit green">
+  <defs>
+    <radialGradient id="glow" cx=".47" cy=".46" r=".62">
+      <stop offset="0" stop-color="#2EA84E" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#17803C" stop-opacity=".10"/>
+      <stop offset="1" stop-color="#0C1310" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="room" cx=".5" cy=".42" r=".8">
+      <stop offset="0" stop-color="#1B2A22"/>
+      <stop offset="1" stop-color="#0B120F"/>
+    </radialGradient>
+    <linearGradient id="skin" x1=".1" y1="0" x2="1" y2=".7">
+      <stop offset="0" stop-color="#6A5140"/>
+      <stop offset=".55" stop-color="#54402F"/>
+      <stop offset="1" stop-color="#3A2C20"/>
+    </linearGradient>
+    <linearGradient id="shell" x1="0" y1="0" x2=".8" y2="1">
+      <stop offset="0" stop-color="#26332C"/>
+      <stop offset="1" stop-color="#131C17"/>
+    </linearGradient>
+    <radialGradient id="vigd" cx=".5" cy=".46" r=".7">
+      <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".55"/>
+    </radialGradient>
+    <pattern id="hatchd" width="9" height="9" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#7FA88E" stroke-width="2.6"/>
+    </pattern>
+    <clipPath id="fr"><rect width="800" height="600"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#fr)">
+    <rect width="800" height="600" fill="url(#room)"/>
+    <rect width="800" height="600" fill="url(#hatchd)" opacity=".035"/>
+    <ellipse cx="376" cy="278" rx="360" ry="300" fill="url(#glow)"/>
+
+    <!-- sound, carrying -->
+    <g fill="none" stroke="#2EA84E" stroke-linecap="round">
+      <path d="M186 232 q-34 62 0 124" stroke-width="3" opacity=".30"/>
+      <path d="M144 208 q-46 86 0 172" stroke-width="3" opacity=".18"/>
+      <path d="M102 184 q-58 110 0 220" stroke-width="3" opacity=".09"/>
+    </g>
+
+    <!-- forearm and palm, behind the phone -->
+    <path d="M812 640 L560 452 q-38 -30 -8 -70 l58 -76 q30 -40 70 -10 L840 470 Z" fill="url(#skin)"/>
+    <ellipse cx="512" cy="392" rx="118" ry="146" fill="url(#skin)" transform="rotate(-12 512 392)"/>
+
+    <g transform="rotate(-12 400 295)">
+      <!-- phone -->
+      <rect x="279" y="74" width="242" height="442" rx="32" fill="#0A100D"/>
+      <rect x="283" y="78" width="234" height="434" rx="29" fill="url(#shell)"/>
+      <rect x="295" y="90" width="210" height="410" rx="21" fill="#0E1713"/>
+
+      <!-- header -->
+      <rect x="295" y="90" width="210" height="54" rx="21" fill="#16241C"/>
+      <rect x="295" y="124" width="210" height="20" fill="#16241C"/>
+      <path d="M317 117 l-9 -9 l9 -9" fill="none" stroke="#7C8E84" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="345" cy="117" r="15" fill="#2A3B32"/>
+      <circle cx="345" cy="112" r="5.5" fill="#4E645A"/>
+      <path d="M336 126 a10 8 0 0 1 18 0 Z" fill="#4E645A"/>
+      <rect x="369" y="109" width="76" height="7" rx="3.5" fill="#8FA598"/>
+      <rect x="369" y="122" width="44" height="5" rx="2.5" fill="#4C5F55"/>
+      <line x1="295" y1="144" x2="505" y2="144" stroke="#22322A" stroke-width="2"/>
+
+      <!-- thread -->
+      <g>
+        <rect x="309" y="164" width="122" height="36" rx="13" fill="#1A2620"/>
+        <rect x="321" y="176" width="80" height="5" rx="2.5" fill="#3C4E45"/>
+        <rect x="321" y="187" width="54" height="5" rx="2.5" fill="#31423A"/>
+
+        <rect x="369" y="212" width="122" height="36" rx="13" fill="#1F4630"/>
+        <rect x="381" y="224" width="84" height="5" rx="2.5" fill="#57866A"/>
+        <rect x="381" y="235" width="60" height="5" rx="2.5" fill="#48755B"/>
+
+        <rect x="309" y="260" width="104" height="32" rx="13" fill="#1A2620"/>
+        <rect x="321" y="272" width="66" height="5" rx="2.5" fill="#3C4E45"/>
+
+        <!-- an earlier voice note, already delivered -->
+        <rect x="369" y="304" width="122" height="38" rx="13" fill="#1F4630"/>
+        <circle cx="386" cy="323" r="9" fill="#8FD9A6"/>
+        <path d="M383 318 v10 M389 318 v10" stroke="#1F4630" stroke-width="2.5" stroke-linecap="round"/>
+        <g fill="#5C8F72">
+          <rect x="402" y="317" width="3" height="12" rx="1.5"/>
+          <rect x="409" y="313" width="3" height="20" rx="1.5"/>
+          <rect x="416" y="318" width="3" height="10" rx="1.5"/>
+          <rect x="423" y="310" width="3" height="26" rx="1.5"/>
+          <rect x="430" y="316" width="3" height="14" rx="1.5"/>
+          <rect x="437" y="312" width="3" height="22" rx="1.5"/>
+          <rect x="444" y="319" width="3" height="8" rx="1.5"/>
+          <rect x="451" y="315" width="3" height="16" rx="1.5"/>
+          <rect x="458" y="318" width="3" height="10" rx="1.5"/>
+          <rect x="465" y="313" width="3" height="20" rx="1.5"/>
+          <rect x="472" y="317" width="3" height="12" rx="1.5"/>
+        </g>
+      </g>
+
+      <!-- recording now -->
+      <rect x="303" y="424" width="148" height="58" rx="29" fill="#16241C" stroke="#2B3F35" stroke-width="1.5"/>
+      <circle cx="325" cy="453" r="6" fill="#E0574A"/>
+      <text x="340" y="458" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" fill="#A8B7AE" letter-spacing="1">0:12</text>
+      <g fill="#2EA84E">
+        <rect x="386" y="446" width="3.2" height="14" rx="1.6"/>
+        <rect x="393" y="440" width="3.2" height="26" rx="1.6"/>
+        <rect x="400" y="448" width="3.2" height="10" rx="1.6"/>
+        <rect x="407" y="434" width="3.2" height="38" rx="1.6"/>
+        <rect x="414" y="443" width="3.2" height="20" rx="1.6"/>
+        <rect x="421" y="437" width="3.2" height="32" rx="1.6"/>
+        <rect x="428" y="447" width="3.2" height="12" rx="1.6"/>
+        <rect x="435" y="441" width="3.2" height="24" rx="1.6"/>
+      </g>
+      <circle cx="483" cy="453" r="30" fill="#2EA84E"/>
+      <circle cx="483" cy="453" r="38" fill="none" stroke="#2EA84E" stroke-width="2" opacity=".35"/>
+      <g fill="#0E1713">
+        <rect x="477" y="440" width="12" height="21" rx="6"/>
+        <path d="M470 455 a13 13 0 0 0 26 0" fill="none" stroke="#0E1713" stroke-width="3.2" stroke-linecap="round"/>
+        <rect x="481.5" y="464" width="3" height="6" rx="1.5"/>
+      </g>
+
+      <!-- fingertips over the far edge -->
+      <g fill="url(#skin)">
+        <rect x="248" y="186" width="86" height="38" rx="19"/>
+        <rect x="244" y="244" width="92" height="40" rx="20"/>
+        <rect x="248" y="304" width="88" height="39" rx="19.5"/>
+        <rect x="256" y="364" width="78" height="36" rx="18"/>
+      </g>
+      <g fill="none" stroke="#8FB39B" stroke-width="1.6" opacity=".45" stroke-linecap="round">
+        <path d="M256 190 h68"/><path d="M252 248 h74"/><path d="M256 308 h70"/><path d="M264 368 h60"/>
+      </g>
+
+      <!-- thumb, resting on the mic -->
+      <path d="M556 556 q-52 -34 -66 -80 q-10 -34 22 -44 q32 -10 48 22 l38 78 Z" fill="url(#skin)"/>
+      <path d="M512 434 q30 -6 44 20" fill="none" stroke="#8FB39B" stroke-width="1.8" opacity=".4" stroke-linecap="round"/>
+    </g>
+
+    <!-- rim light -->
+    <g fill="none" stroke="#3E9B57" stroke-linecap="round" opacity=".5">
+      <path d="M292 138 q6 -44 46 -54" stroke-width="3"/>
+      <path d="M234 200 q-16 24 -12 52" stroke-width="2.5" opacity=".7"/>
+    </g>
+
+    <rect width="800" height="600" fill="url(#vigd)"/>
+  </g>
+</svg>

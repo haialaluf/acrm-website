@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 58 800 500" width="800" height="500" role="img" aria-label="A shop owner leaning on the counter in daylight, answering a customer on their phone">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0" stop-color="#E1DECF"/>
+      <stop offset=".5" stop-color="#ECE9DB"/>
+      <stop offset="1" stop-color="#FAF6E8"/>
+    </linearGradient>
+    <linearGradient id="pane" x1="0" y1="0" x2=".4" y2="1">
+      <stop offset="0" stop-color="#FFFEF7"/>
+      <stop offset="1" stop-color="#EFF1E2"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="1" y1="0" x2="0" y2=".7">
+      <stop offset="0" stop-color="#FFFCEE" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#FFFCEE" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E0D7BF"/>
+      <stop offset="1" stop-color="#CBBFA2"/>
+    </linearGradient>
+    <linearGradient id="fg" x1=".1" y1="0" x2="1" y2=".6">
+      <stop offset="0" stop-color="#182420"/>
+      <stop offset=".55" stop-color="#22322A"/>
+      <stop offset="1" stop-color="#324A3B"/>
+    </linearGradient>
+    <linearGradient id="sleeve" x1=".1" y1="0" x2="1" y2=".8">
+      <stop offset="0" stop-color="#243429"/>
+      <stop offset="1" stop-color="#39533F"/>
+    </linearGradient>
+    <linearGradient id="arm" x1=".1" y1="0" x2=".9" y2="1">
+      <stop offset="0" stop-color="#A5764E"/>
+      <stop offset=".5" stop-color="#C08A5F"/>
+      <stop offset="1" stop-color="#D3A175"/>
+    </linearGradient>
+    <radialGradient id="daylight" cx=".82" cy=".24" r=".82">
+      <stop offset="0" stop-color="#FFFBEA" stop-opacity=".62"/>
+      <stop offset="1" stop-color="#FFFBEA" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx=".58" cy=".4" r=".78">
+      <stop offset=".52" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#3A3520" stop-opacity=".2"/>
+    </radialGradient>
+    <pattern id="hatch" width="9" height="9" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#6E6A55" stroke-width="2.6"/>
+    </pattern>
+    <clipPath id="frame"><rect width="800" height="600"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#frame)">
+    <rect width="800" height="600" fill="url(#wall)"/>
+
+    <!-- window -->
+    <g>
+      <rect x="498" y="26" width="278" height="300" rx="5" fill="url(#pane)"/>
+      <circle cx="612" cy="132" r="54" fill="#E1EADB" opacity=".7"/>
+      <circle cx="686" cy="170" r="40" fill="#E8EFE1" opacity=".7"/>
+      <rect x="498" y="236" width="278" height="90" fill="#EBEDDE" opacity=".5"/>
+      <g fill="none" stroke="#CBC6B1" stroke-width="5">
+        <rect x="498" y="26" width="278" height="300" rx="5"/>
+        <line x1="637" y1="26" x2="637" y2="326"/>
+        <line x1="498" y1="168" x2="776" y2="168"/>
+      </g>
+      <rect x="482" y="326" width="310" height="13" rx="3" fill="#D2CCB7"/>
+    </g>
+
+    <!-- back shelving -->
+    <g opacity=".92">
+      <rect x="8" y="150" width="330" height="9" rx="3" fill="#D5CFBA"/>
+      <rect x="8" y="270" width="330" height="9" rx="3" fill="#D5CFBA"/>
+      <g fill="#DBD4C0">
+        <rect x="34" y="92" width="54" height="58" rx="4"/>
+        <rect x="100" y="108" width="40" height="42" rx="4"/>
+        <rect x="216" y="86" width="64" height="64" rx="4"/>
+        <rect x="290" y="104" width="36" height="46" rx="4"/>
+        <rect x="46" y="214" width="46" height="56" rx="4"/>
+        <rect x="186" y="222" width="72" height="48" rx="4"/>
+        <rect x="286" y="210" width="36" height="60" rx="17"/>
+      </g>
+      <g fill="#E2E9DA">
+        <circle cx="170" cy="130" r="20"/>
+        <circle cx="122" cy="246" r="23"/>
+      </g>
+      <rect x="216" y="112" width="64" height="12" fill="#B4CCB7"/>
+      <rect x="186" y="240" width="72" height="10" fill="#C6BFA8"/>
+    </g>
+
+    <rect width="800" height="600" fill="url(#daylight)"/>
+    <path d="M498 44 L776 44 L800 470 L120 470 Z" fill="url(#beam)"/>
+
+    <!-- the owner, leaning in from the left -->
+    <g>
+      <path d="M-20 620 L-20 78 Q 60 40 146 70 Q 226 100 248 214 L 276 620 Z" fill="url(#fg)"/>
+      <path d="M-20 80 Q 60 42 146 72 Q 226 102 248 216" fill="none" stroke="#8FAE9B" stroke-width="3.5" opacity=".4"/>
+      <path d="M112 116 q58 26 72 104 l16 140 -56 4 Z" fill="#33503F" opacity=".5"/>
+    </g>
+
+    <!-- counter -->
+    <rect x="-10" y="440" width="820" height="17" rx="4" fill="#EAE2CC"/>
+    <rect x="-10" y="455" width="820" height="160" fill="url(#wood)"/>
+    <rect x="-10" y="455" width="820" height="160" fill="url(#hatch)" opacity=".05"/>
+    <g stroke="#BCAF90" stroke-width="1.5" opacity=".4">
+      <line x1="-10" y1="508" x2="810" y2="508"/>
+      <line x1="-10" y1="566" x2="810" y2="566"/>
+    </g>
+
+    <!-- things on the counter -->
+    <g>
+      <ellipse cx="352" cy="446" rx="132" ry="14" fill="#A79A78" opacity=".26"/>
+      <path d="M654 440 l14 -70 h68 l14 70 Z" fill="#C6A587"/>
+      <path d="M654 440 l14 -70 h28 l-8 70 Z" fill="#B69477"/>
+      <g fill="#2F7A45">
+        <path d="M702 370 q-8 -46 -44 -60 q14 40 44 60 Z"/>
+        <path d="M702 370 q10 -52 52 -62 q-20 42 -52 62 Z"/>
+        <path d="M702 370 q-2 -50 12 -84 q14 46 -12 84 Z" fill="#3E9B57"/>
+      </g>
+      <rect x="516" y="394" width="88" height="46" rx="6" fill="#233229"/>
+      <rect x="524" y="402" width="72" height="26" rx="3" fill="#3E5C4B"/>
+      <rect x="536" y="432" width="48" height="4" rx="2" fill="#4B6B58"/>
+      <g>
+        <rect x="412" y="410" width="96" height="18" rx="3" fill="#DED2B5"/>
+        <rect x="404" y="426" width="112" height="15" rx="3" fill="#E6DCC2"/>
+        <line x1="420" y1="419" x2="500" y2="419" stroke="#C7B896" stroke-width="3"/>
+      </g>
+    </g>
+
+    <!-- arm, hand and phone -->
+    <g>
+      <g fill="none" stroke-linecap="round">
+        <path d="M168 214 Q 212 322 248 396" stroke="url(#sleeve)" stroke-width="94"/>
+        <path d="M262 412 Q 300 404 330 380" stroke="url(#arm)" stroke-width="58"/>
+      </g>
+      <ellipse cx="352" cy="352" rx="62" ry="78" fill="#A5764E" transform="rotate(-10 352 352)"/>
+
+      <g transform="rotate(-10 356 322)">
+        <rect x="308" y="234" width="98" height="176" rx="15" fill="#141C17"/>
+        <rect x="313" y="240" width="88" height="164" rx="11" fill="#F7F5EE"/>
+        <rect x="313" y="240" width="88" height="24" rx="11" fill="#EAE7DA"/>
+        <rect x="313" y="253" width="88" height="11" fill="#EAE7DA"/>
+        <circle cx="327" cy="252" r="7" fill="#C6CCC4"/>
+        <rect x="339" y="247" width="36" height="5" rx="2.5" fill="#C6CCC4"/>
+        <rect x="339" y="256" width="20" height="3.5" rx="1.75" fill="#D6DAD2"/>
+        <g fill="#E6E4D8">
+          <rect x="320" y="275" width="52" height="16" rx="8"/>
+          <rect x="320" y="321" width="42" height="15" rx="7.5"/>
+        </g>
+        <g fill="#2EA84E">
+          <rect x="348" y="298" width="46" height="16" rx="8"/>
+          <rect x="340" y="343" width="54" height="16" rx="8"/>
+        </g>
+        <rect x="320" y="375" width="64" height="19" rx="9.5" fill="#EFEDE1"/>
+        <circle cx="392" cy="384" r="9" fill="#17803C"/>
+        <path d="M388.5 380.5 l7 3.5 l-7 3.5 Z" fill="#F7F5EE"/>
+
+        <g fill="url(#arm)">
+          <rect x="394" y="276" width="46" height="21" rx="10.5"/>
+          <rect x="392" y="308" width="50" height="22" rx="11"/>
+          <rect x="396" y="341" width="46" height="21" rx="10.5"/>
+        </g>
+        <g fill="none" stroke="#DDBB94" stroke-width="1.5" opacity=".5" stroke-linecap="round">
+          <path d="M400 280 h34"/><path d="M398 312 h38"/><path d="M402 345 h34"/>
+        </g>
+        <path d="M300 412 q-14 -34 4 -62 q12 -19 29 -9 q17 10 7 30 l-22 45 Z" fill="url(#arm)"/>
+      </g>
+    </g>
+
+    <rect x="-20" y="556" width="840" height="70" rx="20" fill="#8A7C5C" opacity=".16"/>
+    <rect x="-40" y="520" width="300" height="120" rx="26" fill="#B9A883" opacity=".22"/>
+    <rect width="800" height="600" fill="url(#vig)"/>
+  </g>
+</svg>
