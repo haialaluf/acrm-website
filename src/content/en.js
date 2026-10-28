@@ -1,319 +1,373 @@
 /* All English page copy. Mirror any structural change here in he.js. */
-import { APP, DEMO, EMAIL } from './links.js'
+import { APP, EMAIL, HAS_WHATSAPP, whatsapp } from './links.js'
+
+const CHAT = whatsapp('Hi, I’d like to hear about delaCRM')
+const CHAT_SETUP = whatsapp('Hi, I’d like to hear about the setup package')
+/* Until our WhatsApp number is set, the "WhatsApp" buttons fall back to
+   email, so their wording has to say email too. */
+const CHAT_LABEL = HAS_WHATSAPP ? 'Chat with us on WhatsApp' : 'Email us'
+const VIA = HAS_WHATSAPP ? 'on WhatsApp' : 'by email'
+const TERMS = 'No credit card · No commitment · Launch price ₪149/month incl. VAT'
 
 export default {
   meta: {
-    title: 'delaCRM — every customer message in one inbox your team shares',
+    title: 'delaCRM | WhatsApp for business: a shared team inbox, appointment reminders and an AI agent',
     description:
-      'delaCRM puts WhatsApp and Instagram into one inbox your whole team can answer from, with email and Facebook lead forms in the same place — plus reminders that send themselves, a booking link customers can use, and an assistant that replies when you can’t. Keep your existing number.',
+      'WhatsApp, Instagram, Messenger and email in one inbox your whole team answers from, on your existing number. Facebook leads arrive on their own, appointment reminders go out on time, and an AI agent replies at night. Launch price ₪149/month incl. VAT. Try it free.',
   },
 
   /** Shown on the button that switches away from this language. */
   switchTo: { label: 'עברית', title: 'עבור לעברית', lang: 'he' },
 
   nav: {
-    /* `long` is used in the mobile menu, where there is room for fuller wording. */
     links: [
-      { href: '#channels', label: 'Channels' },
-      { href: '#platform', label: 'What you get' },
+      { href: '#product', label: 'Product' },
       { href: '#automations', label: 'Reminders', long: 'Reminders & bookings' },
-      { href: '#agents', label: 'AI assistant' },
+      { href: '#agents', label: 'AI agent' },
+      { href: '#pricing', label: 'Pricing' },
       { href: '#faq', label: 'FAQ' },
     ],
-    demo: 'Book a demo',
+    trial: 'Try it free',
+    chat: CHAT_LABEL,
+    chatShort: HAS_WHATSAPP ? 'WhatsApp' : 'Email',
+    chatHref: CHAT,
     signIn: 'Sign in',
     menu: 'Menu',
   },
 
   hero: {
-    eyebrow: 'WhatsApp · Instagram · Email · Lead forms',
-    title: 'Stop losing customers in your messages.',
-    lede: 'Every WhatsApp and Instagram message arrives in one inbox your whole team can answer from — on your existing number — with email going out from the same place. Reminders send themselves, customers book their own appointments, and an assistant handles the questions you answer twenty times a day.',
-    primary: { label: 'Start free', href: APP },
-    secondary: { label: 'Book a 20-minute demo', href: DEMO },
-    rail: [
-      { text: 'Messages arrive scattered — ', strong: 'every channel, every hour' },
-      { text: 'They leave ordered — ', strong: 'one queue, one team, one record' },
-    ],
+    eyebrow: 'Meta-approved tech provider · Works with your existing number',
+    title: 'No customer who writes on WhatsApp goes unanswered',
+    lede: 'WhatsApp, Instagram, Messenger and Facebook leads arrive in one inbox your whole team answers from, on the number you already have. Appointment reminders go out on their own, and an AI agent answers and books appointments at eleven at night.',
+    primary: { label: 'Try it free', href: APP },
+    secondary: { label: CHAT_LABEL, href: CHAT },
+    note: TERMS,
+    variants: {
+      ai: {
+        eyebrow: 'An AI agent for WhatsApp',
+        title: 'An AI agent that answers your WhatsApp while you’re busy',
+        lede: 'It answers from your business’s own information, books and moves appointments in your calendar, and passes you only what needs you. Every WhatsApp, Instagram and Messenger message lands in one inbox for the whole team.',
+      },
+      leads: {
+        eyebrow: 'Lead management · Facebook, Instagram and your website',
+        title: 'Every Facebook lead gets an answer, even when you’re busy',
+        lede: 'Leads from Facebook and Instagram forms arrive on their own. An automation you set up once sends each new lead a WhatsApp message from a template you approved, and a nudge to anyone who goes quiet. Connect your Page and the last 90 days of leads come in too.',
+      },
+      team: {
+        eyebrow: 'WhatsApp for business · Unlimited users',
+        title: 'One WhatsApp for the whole team',
+        lede: 'Connect your existing business number and everyone who talks to customers works from it, on desktop or phone, each with their own login. The number keeps working in the phone app, and you can see who answered whom.',
+      },
+      reminders: {
+        title: 'WhatsApp appointment reminders that send themselves',
+        lede: 'A day before, and again a few hours before, customers get a reminder. They book their own slot from a link, with a separate calendar for every staff member, room or service.',
+      },
+    },
   },
 
   facts: [
     {
-      title: 'Keep your number',
-      body: 'The number on your door, your van and your business card stays exactly as it is. It keeps working on the phone, too.',
+      title: 'Your number stays your number',
+      body: 'Connect your existing WhatsApp Business number and it keeps working in the phone app too. Customers notice nothing.',
     },
     {
       mark: 'Meta-approved provider',
-      title: 'Your account stays safe',
-      body: 'delaCRM passed Meta Business Verification and Meta’s app review, and connects straight to the official WhatsApp Business Platform. Not a workaround that gets numbers blocked.',
+      title: 'Official WhatsApp connection',
+      body: 'We passed Meta’s business verification and app review and connect to the official WhatsApp Business Platform. Not a plugin, and not a workaround that gets numbers banned.',
     },
     {
-      title: 'Your team, one number',
-      body: 'Everyone answers from the same place, and you can see who replied. No shared phone, no shared password.',
+      title: 'The whole team, one number',
+      body: 'Everyone has their own login and can see who answered whom. No passing a phone around, no shared password.',
     },
     {
-      title: 'Nothing to install',
-      body: 'Open it in a browser or on your phone. If you can use WhatsApp Web, you can use this on day one.',
+      title: 'Browser and phone',
+      body: 'Nothing to install. If you can use WhatsApp Web, you can use this on day one.',
     },
   ],
 
   scatter: {
     label: '01 / Sound familiar?',
-    title: 'The messages aren’t the problem. The scatter is.',
-    lede: 'Customers write wherever is convenient for them. That leaves you with WhatsApp on one person’s phone, Instagram DMs behind someone’s personal login, a website form that emails three people, and no way to know who already answered.',
+    title: 'WhatsApp on one phone, Instagram on another',
+    lede: 'And the website form emails three people. Nobody knows who got back to the customer, and the ones who didn’t hear back go to a competitor.',
     items: [
       {
-        label: 'Costs you',
+        label: 'What you lose',
+        title: 'Every chat lives on the receptionist’s phone',
+        body: 'When she’s on holiday, nobody answers. When she leaves, the customer conversations leave with her.',
+      },
+      {
+        label: 'What you lose',
         title: 'Two people answer, or nobody does',
-        body: 'Either way the customer notices, and they mention it. Meanwhile your team is asking each other “did you get back to her?”',
+        body: 'The customer notices. And the team keeps asking each other: “did you get back to her?”',
       },
       {
-        label: 'Costs you',
-        title: 'The number lives on one phone',
-        body: 'Whoever holds it becomes the bottleneck — and every conversation with every customer walks out with them when they go on holiday or leave.',
-      },
-      {
-        label: 'Costs you',
-        title: 'Follow-ups run on memory',
-        body: 'The quote nobody chased. The appointment nobody confirmed. Nothing breaks loudly; the money just doesn’t arrive.',
+        label: 'What you lose',
+        title: 'Follow-up lives in someone’s head',
+        body: 'A lead nobody called back, a reminder that never went out. Nobody notices until the month’s takings come in.',
       },
     ],
   },
 
-  channels: {
-    label: '02 / One inbox',
-    title: 'They write wherever they like. You read it in one place.',
-    lede: 'WhatsApp and Instagram arrive as one list of conversations, sorted newest first, with the customer’s whole history attached. Email goes out from the same place, and lead forms drop into the same contact list.',
-    items: [
+  product: {
+    label: '02 / Product',
+    title: 'Every channel in one inbox',
+    lede: 'WhatsApp, Instagram, Messenger and email land in one conversation list, each with the customer’s full history. Leads from forms go straight into your contacts.',
+    channels: [
       {
         title: 'WhatsApp',
-        body: 'Your existing WhatsApp Business number, connected properly — so it works on your phone and in delaCRM at the same time. Customers see no change at all.',
+        body: 'Your existing business number, on Meta’s official connection. It works in delaCRM and in the phone app at the same time, and replies sent from the phone show up here too.',
       },
       {
         title: 'Instagram',
-        body: 'Instagram DMs land in the same list as everything else. No separate tab, and no handing your personal login around the team.',
+        body: 'Private messages (DMs) land in the same list. Nobody needs your account password.',
+      },
+      {
+        title: 'Messenger',
+        body: 'Connect your Facebook Page and Messenger conversations arrive in the inbox alongside your lead forms.',
       },
       {
         title: 'Email',
-        body: 'Send from your own domain, beside the chats, with saved wording you can reuse — announcements and follow-ups for the customers who still prefer an email. Sending only: replies come back to your normal mailbox.',
+        body: 'Send and receive from your own domain. An incoming email opens as a conversation, right next to WhatsApp.',
       },
       {
-        title: 'Facebook lead forms',
-        body: 'Instant Form leads from your Facebook and Instagram ads become contacts on their own, ready to message or drop straight into a follow-up. Your website form can post leads in the same way.',
+        title: 'Lead forms',
+        body: 'Leads from Facebook and Instagram forms arrive on their own, and connecting your Page brings in the last 90 days of leads. Your website form can send leads in too.',
+      },
+      {
+        title: 'Your past chats',
+        body: 'When you connect your number you can bring in recent conversations from the phone, so you don’t start from zero.',
       },
     ],
-  },
-
-  gettingStarted: {
-    label: '03 / Getting started',
-    title: 'You could be answering from it this afternoon.',
-    lede: 'No new number, no SIM card, no “we’ve changed number” post. You connect the WhatsApp Business account you already have, and most of the work is deciding what you want to say.',
-    items: [
-      {
-        label: 'Step one',
-        title: 'Connect your number',
-        body: 'Sign in and approve delaCRM through WhatsApp itself. It takes a few clicks and your number keeps working the whole time. Instagram connects the same way.',
-      },
-      {
-        label: 'Step two',
-        title: 'Bring your contacts',
-        body: 'Upload your customer list from a spreadsheet — wrong or duplicated numbers get flagged as they come in — then write the messages you send most often.',
-      },
-      {
-        label: 'Step three',
-        title: 'Invite your team',
-        body: 'Add the people who answer customers, decide who can do what, and start working the same inbox together instead of forwarding screenshots.',
-      },
-    ],
-  },
-
-  platform: {
-    label: '04 / What you get',
-    title: 'Everything that happens after “hello”.',
-    lede: 'Most tools stop at sending a message. This covers the rest: who you’re talking to, what you’ve already promised them, who on the team is handling it, and what it’s costing you this month.',
     rows: [
       {
         label: 'Shared inbox',
-        title: 'One conversation per customer, live for the whole team',
-        body: 'It looks and works like WhatsApp — photos, voice notes, documents, ticks that tell you the message was read. The difference is that your colleague can pick up the thread where you left it, and the history is still there in a year when the customer comes back.',
-        tags: ['Works on your phone', 'Photos & voice notes', 'Read receipts', 'Full history'],
-        viz: { anim: 'inbox', caption: 'Messages arriving and being picked up' },
+        title: 'Looks like WhatsApp, works for the whole team',
+        body: 'Photos, voice notes, documents, and blue ticks when the customer has read it. Anyone can pick up a conversation where a colleague left off, and you can hand a chat to a specific person in one click. The history stays, even when the customer comes back a year later.',
+        tags: ['Works on mobile', 'Voice notes & photos', 'Assign to a teammate', 'Full history'],
+        viz: { anim: 'inbox', caption: 'Messages arrive and someone picks them up' },
       },
       {
-        label: 'Announcements',
-        title: 'Tell a thousand customers something, personally',
-        body: 'Write it once with the customer’s name and details filled in automatically, check how it looks, and send it to your list — or schedule it for the hour people actually read their phone. WhatsApp has to approve promotional wording in advance; the app walks you through the submission and shows you where each one stands.',
-        tags: ['Names filled in', 'Preview before sending', 'Send to a list', 'Schedule for later'],
-        viz: { anim: 'template', caption: 'Customer details filling a saved message' },
+        label: 'Leads',
+        title: 'Every lead at its stage',
+        body: 'Define your own sales stages: new enquiry, quote sent, booked, closed. Leads from Facebook, Instagram and your website arrive on their own, and someone who fills in the form again joins their open lead instead of creating a duplicate.',
+        tags: ['Your own stages', 'Leads arrive on their own', 'No duplicates', 'Notes & tags'],
+        viz: { anim: 'customers', caption: 'Customers and leads in one place' },
       },
       {
-        label: 'Customers & team',
-        title: 'A customer list, real permissions, and a bill you see coming',
-        body: 'Every person who ever messaged you, in one list you can search. Staff invited with the access you choose — full control, or answering only. And a simple chart of how many messages you’ve sent this month, while there’s still time to do something about it.',
-        tags: ['Searchable customer list', 'Staff permissions', 'Usage you can see', 'Several businesses'],
-        viz: { anim: 'customers', caption: 'Your customer list and this month’s usage' },
+        label: 'Broadcasts',
+        title: 'A personal message to a thousand customers',
+        body: 'Write it once and each customer’s name and details fill in. Preview it, send it or schedule it. Meta approves marketing messages in advance; delaCRM submits them and shows where each one stands. Anyone who replies “stop” is taken off the list.',
+        tags: ['Names fill in', 'Preview', 'Scheduling', 'Automatic opt-out'],
+        viz: { anim: 'template', caption: 'Customer details fill a saved message' },
       },
     ],
   },
 
+  // Shown under the product section, the longest stretch without a button.
+  productCta: { label: 'Try it free', note: TERMS },
+
   automations: {
-    label: '05 / Reminders & bookings',
-    title: 'The follow-ups you’d otherwise forget.',
-    lede: 'Set it up once and it keeps happening: the reminder the day before an appointment, the check-in a week after delivery, the nudge on a quote nobody answered. Sent whether or not anyone remembered — which is the entire point.',
+    label: '03 / Reminders & bookings',
+    title: 'It remembers when you’re busy',
+    lede: 'Build a flow once and it runs by itself: a message for every new lead, a reminder before every appointment, a review request after a visit. Before you switch it on, run a test and see what would have gone out.',
     items: [
       {
         title: 'Appointment reminders',
-        body: 'A message the day before, or a few hours before, automatically. Fewer no-shows, and nobody on your team has to keep a list.',
+        body: 'A day before and again a few hours before. Fewer no-shows, and nobody has to remember to send them.',
       },
       {
-        title: 'Follow up after the sale',
-        body: 'Check in a week later, ask for a review, offer the refill. The messages that grow repeat business, sent without anyone diarising them.',
+        title: 'An answer for every new lead',
+        body: 'A lead from your campaign gets a WhatsApp message straight away. No reply in two days? They get a follow-up.',
       },
       {
-        title: 'Chase the quiet leads',
-        body: 'Someone asked for a price and went silent. A polite nudge two days later, automatically, in the same conversation.',
+        title: 'After the visit',
+        body: 'A week later: ask how it went, request a review, offer the next treatment.',
       },
       {
-        title: 'Let customers book themselves',
-        body: 'Send a link, they pick a free slot. It only offers the hours you actually work, so nothing lands on your evening.',
+        title: 'Birthdays and renewals',
+        body: 'A message on their birthday, or a month before their plan runs out. Any date you keep on a customer can trigger a message.',
       },
       {
-        title: 'On the calendar in your pocket',
-        body: 'New bookings appear on your iPhone, iPad or Mac — and anything you block there stops being offered. Any other app that speaks CalDAV can connect too.',
+        title: 'Self-booking',
+        body: 'Send a link and the customer picks a free slot. A separate calendar for every staff member, room or service, only in your working hours.',
       },
       {
-        title: 'Try it before customers see it',
-        body: 'Run any reminder as a test and read exactly what would have been sent, before a single customer gets anything.',
+        title: 'Syncs with your iPhone',
+        body: 'New appointments show up in your calendar on iPhone, iPad and Mac, and anything you block there stops being offered.',
       },
     ],
   },
 
   agents: {
-    label: '06 / AI assistant',
-    title: 'Someone to answer at eleven at night.',
-    lede: 'Most of what arrives isn’t really a conversation: opening hours, do you deliver here, is this in stock, how much. An assistant can take those and hand you the ones that are actually worth your time.',
+    label: '04 / AI agent',
+    title: 'Who answers your customers at eleven at night?',
+    lede: 'Most messages repeat themselves: when are you open, how much is it, is there a slot tomorrow morning. An AI agent answers them from your business’s own information and passes you only what needs you.',
     rows: [
       {
-        label: 'It can check things',
-        title: 'It answers from your business, not from guesswork',
-        body: 'This is the difference that matters: the assistant can look things up before it replies. Your availability it reads out of the box — it books, moves and cancels appointments itself. Your prices, your stock, the system you already keep them in: we connect those, and then “do you have it in a 42?” gets a real answer instead of a polite deflection.',
-        tags: ['Your calendar, built in', 'Your prices', 'Your stock', 'Your own systems, connected'],
-        viz: { anim: 'agent', caption: 'The assistant checking before it answers' },
+        label: 'Answers and acts',
+        title: 'It books appointments, not just replies',
+        body: 'The agent sees your calendar, books, moves and cancels appointments inside the conversation, and moves the lead to the next stage. When it doesn’t know, it hands over to a person, and it stops the moment a teammate replies. It can also be connected to your price list or your own system, through our team.',
+        tags: ['Books in your calendar', 'Moves leads', 'Hands over to a person', 'Your price list'],
+        viz: { anim: 'agent', caption: 'The agent checks the calendar before it answers' },
       },
       {
-        label: 'It understands more than text',
-        title: 'Voice notes, photos, documents — all of it',
-        body: 'Customers send what’s convenient: a rambling voice note, a photo of the broken part, a PDF of the old invoice. All of it gets read and turned into something you can act on, so nobody has to hold a phone to their ear to find out what the message said.',
-        tags: ['Voice notes read as text', 'Photos', 'Video', 'PDFs & spreadsheets'],
-        viz: { anim: 'voice', caption: 'A voice note becoming text' },
+        label: 'Understands it all',
+        title: 'Voice notes, photos and documents',
+        body: 'Customers send a three-minute voice note, a photo, a PDF of an old quote. The agent understands all of it and answers in writing, and you read the content without listening to the recording.',
+        tags: ['Voice notes as text', 'Photos', 'Video', 'PDFs & spreadsheets'],
+        viz: { anim: 'voice', caption: 'A voice note turns into text' },
+      },
+    ],
+    setup: {
+      text: 'Rather not build it yourself? With the setup package we build your AI agent and automations with you, and test them before they talk to customers. ₪399 instead of ₪1,999, incl. VAT.',
+      cta: { label: CHAT_LABEL, href: CHAT_SETUP },
+    },
+  },
+
+  gettingStarted: {
+    label: '05 / Getting started',
+    title: 'Answer customers from delaCRM today',
+    lede: `No new number and no “we’ve changed numbers” announcement. Three steps, nothing to install. Stuck? Message us ${VIA}.`,
+    items: [
+      {
+        label: 'Step 1',
+        title: 'Connect your number',
+        body: 'Sign in with your business’s Facebook account and approve in the WhatsApp app on your phone. The number keeps working the whole time. Instagram and your Facebook Page connect the same way, and the last 90 days of leads come in.',
+      },
+      {
+        label: 'Step 2',
+        title: 'Bring in your contacts',
+        body: 'Upload your customer list from a spreadsheet. Wrong and duplicate numbers are flagged during the upload.',
+      },
+      {
+        label: 'Step 3',
+        title: 'Invite your team',
+        body: 'Add whoever talks to customers and choose what each person can do. From then on, everyone works from one inbox.',
       },
     ],
   },
 
-  noLockIn: {
-    label: '07 / No lock-in',
-    title: 'Nothing here is held hostage.',
-    lede: 'The things that make switching tools frightening — and where each of them stands here.',
-    items: [
-      {
-        label: 'Stays yours',
-        title: 'Your number',
-        body: 'It never becomes ours. It keeps working on your phone the whole time you use delaCRM, and it keeps working if you stop.',
+  pricing: {
+    label: '06 / Pricing',
+    title: 'One price, the whole system',
+    lede: 'No tiers and no locked features. Start free, and subscribe once you see it working.',
+    plan: {
+      name: 'delaCRM',
+      badge: 'Launch price',
+      price: {
+        was: '₪199',
+        wasLabel: 'instead of ₪199',
+        now: '₪149',
+        unit: '/month, incl. VAT',
+        note: 'For your first 12 months, then ₪199/month',
       },
-      {
-        label: 'Stays yours',
-        title: 'Your customers and their history',
-        body: 'Contacts, conversations, the lot — yours to take out through the API whenever you want, or ask and we’ll put the export together for you. And closing your account deletes it here rather than quietly keeping it.',
-      },
-      {
-        label: 'If you want it',
-        title: 'Run it on your own servers',
-        body: 'Most businesses never need this. But the software is open, so if your IT person or your industry demands it, delaCRM can run entirely on infrastructure you own.',
-      },
-    ],
+      desc: 'For one business and its whole team. Unlimited users.',
+      cta: { label: 'Try it free', href: APP },
+      terms: 'No credit card · No commitment · Cancel any time',
+      features: [
+        'WhatsApp, Instagram, Messenger and email in one inbox',
+        'Leads from Facebook and your website, with sales stages',
+        'Reminders, follow-ups and automations',
+        'Calendars and self-booking',
+        'An AI agent that answers and books',
+        'Broadcasts to customers who opted in',
+        'Users and permissions for the whole team',
+        'Data export, API and integrations',
+      ],
+    },
+    setup: {
+      name: 'Setup package',
+      badge: 'One-time',
+      price: { was: '₪1,999', wasLabel: 'instead of ₪1,999', now: '₪399', unit: 'incl. VAT' },
+      desc: 'Rather not build it yourself? We map with you how customers reach you and what you tell them, and build your automations and AI agent together.',
+      cta: { label: CHAT_LABEL, href: CHAT_SETUP },
+    },
+    footnote:
+      'Separately from the subscription, Meta charges a few agorot per message for messages a business starts from an approved template, such as an appointment reminder or a broadcast, and for replies beyond 1,000 a month. That fee goes to Meta, not to us, and you can see your usage in delaCRM.',
   },
 
   faq: {
-    label: '08 / FAQ',
-    title: 'Straight answers.',
+    label: '07 / FAQ',
+    title: 'What people ask before they start',
     items: [
       {
-        q: 'Do I have to give up my current WhatsApp number?',
-        a: 'No. You connect the WhatsApp Business account you already have, and it keeps working on the phone at the same time. The number on your door, your van and your business card doesn’t change, and your customers won’t notice anything except faster replies.',
+        q: 'How much does it cost?',
+        a: '₪149 a month including VAT for your first 12 months, then ₪199 a month. The price is per business with unlimited users, and every subscription includes the whole system. Separately, Meta charges a few agorot per message for messages the business starts, such as an appointment reminder or a broadcast, and for replies beyond 1,000 a month.',
       },
       {
-        q: 'Could my number get blocked?',
-        a: 'Not for using delaCRM. We connect through the route WhatsApp built for businesses, which is the opposite of the copy-paste tools that get numbers blocked. What you can still get in trouble for is messaging people who never asked to hear from you — that’s true on every platform, and the app is built to keep you the right side of it.',
+        q: 'What does the free trial include?',
+        a: 'Sign up without a credit card, connect a channel and try it on real customers. The free plan includes 100 messages a month, incoming and outgoing, and delaCRM warns you as you approach the limit. After that, new messages still reach the app on your phone, but don’t come into delaCRM until you subscribe.',
       },
       {
-        q: 'What does it cost?',
-        a: 'You can start free and watch your own message volume before you spend anything. WhatsApp charges businesses separately for some conversations, so you’ll see two numbers rather than one hidden in the other — we’d rather show you both. Book a call and we’ll price it against your actual volume.',
+        q: 'Do I have to give up my current number?',
+        a: 'No. You connect your existing WhatsApp Business account and it keeps working in the phone app. Replies sent from the phone show up in delaCRM too, and when you connect you can bring in recent conversations as well.',
       },
       {
-        q: 'How hard is it to set up?',
-        a: 'Connecting your number is a few clicks. Uploading your customer list is a spreadsheet. Most businesses are answering customers from it the same day, and if you’d rather not do it alone we’ll sit on a call and do it with you.',
+        q: 'Could my number get banned?',
+        a: 'Not because of us. We connect through the official platform Meta built for businesses, not through unofficial tools, which is what gets numbers banned. What does put a number at risk is messaging people who didn’t ask to hear from you, so broadcasts only go to people who opted in, and anyone who replies “stop” is taken off the list.',
       },
       {
-        q: 'Can I message my whole customer list?',
-        a: 'You can message the customers who agreed to hear from you, and WhatsApp reviews promotional wording before it goes out — the app handles that submission for you. Anyone who replies STOP is removed immediately. If you’re looking for a tool that ignores all that, this isn’t it.',
+        q: 'We already use WhatsApp Business. What’s the difference?',
+        a: 'With WhatsApp Business, whoever holds the phone usually answers, and there’s no way to tell who replied to whom. Here everyone has their own login, you can hand a chat to a specific person, and you can see who answered and when. Instagram, Messenger, leads, appointment reminders and an AI agent are in the same place.',
       },
       {
-        q: 'Is the AI assistant going to say something embarrassing?',
-        a: 'That’s the right worry. You decide which conversations it touches and what it’s allowed to look up, you can read every word it sent, and it hands the conversation to a person the moment it should — it also goes quiet on its own as soon as one of your team replies in the thread. And before it answers a single customer, you can sit and talk to it yourself in a private test conversation until it sounds like you.',
+        q: 'What does the setup package include?',
+        a: 'A discovery session with our team where we map how customers reach you, what they ask and what you answer. Then we build your reminders, follow-ups and AI agent with you, and test them before they talk to customers. The regular price is ₪1,999; right now it’s ₪399 including VAT.',
+      },
+      {
+        q: 'Could the AI agent say something embarrassing?',
+        a: 'You decide which conversations it handles and what it may answer. Before it talks to a single customer, you chat with it in a private test until it sounds like your business. When it doesn’t know, it hands over to a person, and it stops when a teammate replies. Everything it sends is kept and visible to you.',
       },
       {
         q: 'How many people can use it?',
-        a: 'As many as you invite, each with the access you choose. One person can also run more than one business from the same login and switch between them — useful if you have two locations, or manage accounts for clients.',
+        a: 'As many as you like, at no extra cost, each with their own login and permissions: full control or reply-only. If you run more than one business, say two branches, you can switch between them from the same login.',
       },
       {
-        q: 'What happens to my data if I leave?',
-        a: 'You take your export first — through the API, or ask us and we’ll put it together. Closing your account then deletes your contacts, conversations, messages and everything attached to them in one go; files and images are swept within the hour and unreadable in the meantime. Encrypted backups age out on the schedule set out in our privacy policy.',
+        q: 'Is there a commitment? What happens to my data if I leave?',
+        a: 'No commitment; cancel any time. You can export all your data whenever you like, and closing your account deletes it from our side. Your number stays yours and keeps working on your phone.',
       },
       {
-        q: 'Do you work with my other systems?',
-        a: 'Usually, yes. Website forms, Facebook lead ads, spreadsheets and most automation tools can send leads straight in, and if you have a developer or agency, the same API the app itself runs on is open to them, along with webhooks and an MCP server for AI tools. Tell us what you run and we’ll tell you honestly whether it connects.',
-      },
-      {
-        q: 'Are you part of WhatsApp or Meta?',
-        a: 'We’re a Meta-approved provider. delaCRM passed Meta Business Verification and Meta’s app review, and connects directly to the official WhatsApp Business Platform — which is what lets you connect your number the way WhatsApp intends businesses to connect, with no workaround that gets numbers blocked. What we are not is part of Meta itself: delaCRM is an independent company, not affiliated with, endorsed by, or sponsored by WhatsApp LLC or Meta Platforms, Inc.',
+        q: 'Does it connect to our other tools?',
+        a: 'Usually, yes. Website forms, Facebook campaigns and automation tools can send leads in, and developers get an API and webhooks. You can also connect ChatGPT or Claude and ask them, say, which of this week’s leads haven’t had a reply yet.',
       },
     ],
   },
 
   cta: {
     label: 'Get started',
-    title: 'Twenty minutes, and an honest answer.',
-    lede: 'Tell us how customers reach you today and we’ll tell you whether this is worth the change for a business your size. If it isn’t yet, we’ll say so — that’s a shorter conversation than the alternative.',
-    primary: { label: 'Book a demo', href: DEMO },
-    secondary: { label: 'Start free', href: APP },
+    title: 'Connect your number and see for yourself',
+    lede: `Sign up free, connect WhatsApp and answer your first customer from delaCRM today. Have a question first? Message us ${VIA}.`,
+    primary: { label: 'Try it free', href: APP },
+    secondary: { label: CHAT_LABEL, href: CHAT },
+    note: TERMS,
   },
 
   footer: {
     blurb:
-      'One inbox for WhatsApp and Instagram, with email and lead forms in the same place — for businesses that would rather answer customers than manage software.',
+      'One inbox for WhatsApp, Instagram, Messenger and email, for businesses that would rather answer customers than manage software.',
     cols: [
       {
         title: 'Product',
         links: [
-          { href: '#channels', label: 'One inbox' },
-          { href: '#platform', label: 'What you get' },
+          { href: '#product', label: 'Every channel' },
           { href: '#automations', label: 'Reminders & bookings' },
-          { href: '#agents', label: 'AI assistant' },
+          { href: '#agents', label: 'AI agent' },
           { href: '#how', label: 'Getting started' },
+          { href: '#pricing', label: 'Pricing' },
         ],
       },
       {
         title: 'Legal',
         links: [
-          { href: 'privacy.html', label: 'Privacy Policy' },
-          { href: 'data-deletion.html', label: 'Data Deletion' },
+          { href: 'privacy.html', label: 'Privacy policy' },
+          { href: 'data-deletion.html', label: 'Data deletion' },
         ],
       },
       {
-        title: 'Company',
+        title: 'Contact',
         links: [
+          { href: CHAT, label: CHAT_LABEL },
           { href: `mailto:${EMAIL}`, label: EMAIL },
-          { href: DEMO, label: 'Book a demo' },
           { href: APP, label: 'Sign in' },
         ],
       },

@@ -6,7 +6,10 @@ import { useLocale } from '../i18n/index.js'
 
 export default function Hero() {
   const { t, dir } = useLocale()
-  const { hero } = t
+  // ?v=<key> swaps in the headline written for one ad group, so the page a
+  // visitor lands on continues the ad they clicked.
+  const variant = new URLSearchParams(window.location.search).get('v')
+  const hero = { ...t.hero, ...t.hero.variants?.[variant] }
   const stage = useRef(null)
 
   // Feeds the cursor position to the flow animation, which drifts the whole
@@ -44,31 +47,24 @@ export default function Hero() {
       <Canvas anim="flow" />
       <div className="stage-veil" aria-hidden="true" />
       <div className="wrap stage-in">
+        {/* No reveal here: the hero is the first thing on screen, and text
+            that waits on a script to fade in reads as an empty page. */}
         <div className="hero-copy">
-          <div className="eyebrow mono" data-rv="0">
+          <div className="eyebrow mono">
             <span className="dot" />
             {hero.eyebrow}
           </div>
-          <h1 data-rv="1">{hero.title}</h1>
-          <p className="stage-sub" data-rv="2">
-            {hero.lede}
-          </p>
-          <div className="hero-actions" data-rv="3">
-            <a className="btn btn-light" href={hero.primary.href}>
+          <h1>{hero.title}</h1>
+          <p className="stage-sub">{hero.lede}</p>
+          <div className="hero-actions">
+            <a className="btn btn-light" href={hero.primary.href} data-cta="hero-trial">
               {hero.primary.label}
             </a>
-            <a className="btn btn-dark-ghost" href={hero.secondary.href}>
+            <a className="btn btn-dark-ghost" href={hero.secondary.href} data-cta="hero-whatsapp">
               {hero.secondary.label}
             </a>
           </div>
-        </div>
-        <div className="stage-rail mono" data-rv="4">
-          {hero.rail.map((r) => (
-            <span key={r.strong}>
-              {r.text}
-              <b>{r.strong}</b>
-            </span>
-          ))}
+          {hero.note && <p className="hero-note">{hero.note}</p>}
         </div>
       </div>
     </section>

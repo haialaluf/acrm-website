@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import LangToggle from './LangToggle.jsx'
 import { useCopy } from '../i18n/index.js'
-import { APP, DEMO } from '../content/index.js'
+import { APP } from '../content/index.js'
 
 /** Width at which the inline links come back and the burger goes away. */
 const DESKTOP = 1010
@@ -48,11 +48,14 @@ export default function Nav() {
         </nav>
         <div className="nav-cta">
           <LangToggle />
-          <a className="btn btn-ghost btn-sm" href={DEMO}>
-            {nav.demo}
-          </a>
-          <a className="btn btn-primary btn-sm" href={APP}>
+          <a className="nav-signin" href={APP}>
             {nav.signIn}
+          </a>
+          <a className="btn btn-ghost btn-sm" href={nav.chatHref} data-cta="nav-whatsapp">
+            {nav.chatShort}
+          </a>
+          <a className="btn btn-primary btn-sm" href={APP} data-cta="nav-trial">
+            {nav.trial}
           </a>
         </div>
         <button
@@ -74,11 +77,14 @@ export default function Nav() {
             {l.long || l.label}
           </a>
         ))}
-        <a className="btn btn-primary" href={APP}>
-          {nav.signIn}
+        <a className="btn btn-primary" href={APP} data-cta="menu-trial">
+          {nav.trial}
         </a>
-        <a className="btn btn-ghost" href={DEMO}>
-          {nav.demo}
+        <a className="btn btn-ghost" href={nav.chatHref} data-cta="menu-whatsapp">
+          {nav.chat}
+        </a>
+        <a className="btn btn-ghost" href={APP}>
+          {nav.signIn}
         </a>
         <LangToggle className="lang-block" />
       </div>
