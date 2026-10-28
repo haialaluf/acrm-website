@@ -23,7 +23,7 @@ export default function Facts() {
   return (
     <section className="strip">
       <div className="wrap">
-        <div className="facts" data-rv="0">
+        <div className="facts" data-rv="0" style={{ '--n': facts.length }}>
           {facts.map((f) => (
             <div className="fact" key={f.title}>
               {/* Only the Meta-approval fact carries a mark; the rest read plain. */}

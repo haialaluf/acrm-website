@@ -60,9 +60,11 @@ export default function Hero() {
             <a className="btn btn-light" href={hero.primary.href} data-cta="hero-trial">
               {hero.primary.label}
             </a>
-            <a className="btn btn-dark-ghost" href={hero.secondary.href} data-cta="hero-whatsapp">
-              {hero.secondary.label}
-            </a>
+            {hero.secondary && (
+              <a className="btn btn-dark-ghost" href={hero.secondary.href} data-cta="hero-whatsapp">
+                {hero.secondary.label}
+              </a>
+            )}
           </div>
           {hero.note && <p className="hero-note">{hero.note}</p>}
         </div>

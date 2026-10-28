@@ -11,9 +11,11 @@ export default function Cta() {
             <a className="btn btn-light" href={cta.primary.href} data-cta="end-trial">
               {cta.primary.label}
             </a>
-            <a className="btn btn-dark-ghost" href={cta.secondary.href} data-cta="end-whatsapp">
-              {cta.secondary.label}
-            </a>
+            {cta.secondary && (
+              <a className="btn btn-dark-ghost" href={cta.secondary.href} data-cta="end-whatsapp">
+                {cta.secondary.label}
+              </a>
+            )}
           </div>
           {cta.note && <p className="hero-note">{cta.note}</p>}
         </SectionHead>
