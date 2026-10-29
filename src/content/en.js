@@ -13,7 +13,7 @@ export default {
   meta: {
     title: 'delaCRM | WhatsApp automations for one-person businesses: lead replies, reminders and an AI agent',
     description:
-      'delaCRM answers leads and customers on WhatsApp and sends reminders and follow-ups, from your existing number over the official connection. Need another process? Describe it to Claude or ChatGPT. Launch price ₪149/month incl. VAT. Try it free.',
+      'delaCRM answers leads and customers on WhatsApp and sends reminders and follow-ups, from your existing number over the official connection. Want to automate another process? Describe it to Claude or ChatGPT. Launch price ₪149/month incl. VAT. Try it free.',
   },
 
   /** Shown on the button that switches away from this language. */
@@ -49,7 +49,7 @@ export default {
   hero: {
     eyebrow: 'WhatsApp automations for one-person businesses · Official connection',
     title: 'No customer goes unanswered',
-    lede: 'delaCRM answers leads and customers on WhatsApp and sends them reminders, from your existing number, even while you’re on a job. Need another process? Describe it to Claude or ChatGPT and get a ready draft.',
+    lede: 'delaCRM answers leads and customers on WhatsApp and sends them reminders, from your existing number, even while you’re on a job. Want to automate another process? Describe it to Claude or ChatGPT and get a ready draft.',
     primary: { label: 'Try it free', href: APP },
     // Hidden until there is a WhatsApp number: an email button this high up
     // competes with the trial for nothing.
@@ -128,7 +128,7 @@ export default {
       automations: {
         eyebrow: 'WhatsApp automations for small businesses',
         title: 'Business automations, no developer needed',
-        lede: 'A message for every new lead, a reminder before a visit, a review request after a job. Start free, or build them with us for ₪399. Need another process? Describe it to Claude or ChatGPT and it builds a draft.',
+        lede: 'A message for every new lead, a reminder before a visit, a review request after a job. Start free, or build them with us for ₪399. Want to automate another process? Describe it to Claude or ChatGPT and it builds a draft.',
       },
       ai: {
         eyebrow: 'An AI agent for WhatsApp',
@@ -289,7 +289,7 @@ export default {
   },
 
   build: {
-    label: '02 / Any other process',
+    label: '02 / Automate any process',
     title: 'Need something else? Write it in your own words',
     lede: 'Connect Claude or ChatGPT to delaCRM and tell it what you need, like a message to a new assistant. It builds the process, and you check it and switch it on.',
     steps: [
@@ -343,7 +343,7 @@ export default {
         },
         {
           title: 'With us',
-          body: 'We design and build your processes and AI agent for ₪399 instead of ₪1,999, incl. VAT. Then you carry on with the monthly subscription.',
+          body: 'We design and build automations for your processes, and your AI agents, for ₪399 instead of ₪1,999, incl. VAT. Then you carry on with the monthly subscription.',
           cta: { label: CHAT_LABEL, href: CHAT_SETUP },
         },
       ],
@@ -424,7 +424,7 @@ export default {
       name: 'Setup package',
       badge: 'One-time',
       price: { was: '₪1,999', wasLabel: 'instead of ₪1,999', now: '₪399', unit: 'incl. VAT' },
-      desc: 'Rather not build it yourself? We map with you how customers reach you and what you tell them, and build your processes and AI agent together.',
+      desc: 'Rather not build it yourself? We map with you how customers reach you and what you tell them, and build automations for your processes, and your AI agents, together.',
       cta: { label: CHAT_LABEL, href: CHAT_SETUP },
     },
     footnote:
@@ -466,7 +466,7 @@ export default {
       },
       {
         q: 'What does the setup package include?',
-        a: 'A discovery session with our team: how customers reach you, what they ask and what you answer. Then we build your processes and AI agent with you, and test them before they talk to customers. The regular price is ₪1,999; right now it’s ₪399 including VAT, one-time.',
+        a: 'A discovery session with our team: how customers reach you, what they ask and what you answer. Then we build automations for your processes, and your AI agents, with you, and test them before they talk to customers. The regular price is ₪1,999; right now it’s ₪399 including VAT, one-time.',
       },
       {
         q: 'Is there a commitment? What happens to my data if I leave?',
