@@ -1,42 +1,42 @@
-import useReveal from './hooks/useReveal.js'
+import { useEffect, useRef } from 'react'
 import { useLocale } from './i18n/index.js'
-import Nav from './components/Nav.jsx'
+import { start } from './behaviors.js'
+import Nav, { Dots } from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
-import Facts from './components/Facts.jsx'
 import Work from './components/Work.jsx'
-import Build from './components/Build.jsx'
+import Build, { Ways } from './components/Build.jsx'
 import AllInOne from './components/AllInOne.jsx'
 import GettingStarted from './components/GettingStarted.jsx'
 import Pricing from './components/Pricing.jsx'
 import Faq from './components/Faq.jsx'
 import Cta from './components/Cta.jsx'
-import Footer from './components/Footer.jsx'
+
+/** Every section, in page order, by id; the side dots follow this. */
+const SECTIONS = ['top', 'work', 'build', 'ways', 'all', 'how', 'pricing', 'faq', 'start-cta']
 
 export default function App() {
-  const { locale } = useLocale()
+  const { locale, t } = useLocale()
+  const root = useRef(null)
 
-  // Switching language replaces most of the marked elements, so the reveal
-  // observer has to be pointed at the new ones.
-  useReveal(locale)
+  // The animations drive the DOM directly, so the page is drawn once per
+  // language (the `key` below) and they are started over on each.
+  useEffect(() => start(root.current, t), [t])
 
-  // Outcome first (what it takes off your hands), then how you get more of
-  // it (ask Claude or ChatGPT), then that it is all one system at one price.
-  // "How to start" sits right before the price, next to the button.
   return (
-    <>
+    <div ref={root} key={locale}>
       <Nav />
+      <Dots ids={SECTIONS} />
       <main>
         <Hero />
-        <Facts />
         <Work />
         <Build />
+        <Ways />
         <AllInOne />
         <GettingStarted />
         <Pricing />
         <Faq />
         <Cta />
       </main>
-      <Footer />
-    </>
+    </div>
   )
 }

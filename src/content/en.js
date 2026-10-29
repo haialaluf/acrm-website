@@ -32,6 +32,18 @@ export default {
     chatHref: CHAT,
     signIn: 'Sign in',
     menu: 'Menu',
+    /** Section names, by id, for the dots on the side of the page. */
+    sections: {
+      top: 'Home',
+      work: 'What it does',
+      build: 'Build with AI',
+      ways: 'Three ways',
+      all: 'All in one',
+      how: 'Getting started',
+      pricing: 'Pricing',
+      faq: 'FAQ',
+      'start-cta': 'Get started',
+    },
   },
 
   hero: {
@@ -43,6 +55,70 @@ export default {
     // competes with the trial for nothing.
     secondary: HAS_WHATSAPP ? { label: CHAT_LABEL, href: CHAT } : null,
     note: 'Same number · No credit card · No commitment · ₪149/month for the first year',
+    /* The inbox beside the headline. It plays `scenes` in turn; each step
+       waits `d` ms, then adds one message to the open conversation. */
+    device: {
+      title: 'Inbox',
+      status: 'Your number · Connected',
+      search: 'Search conversations',
+      input: 'Type a message…',
+      now: 'Now',
+      convs: [
+        { av: 'NC', name: 'Noa Cohen', time: '09:12', prev: 'New lead · Facebook form', sub: 'Lead · Facebook', tag: 'WhatsApp' },
+        { av: 'DL', name: 'Dana Levi', time: '08:47', prev: 'Thanks, see you then!' },
+        { av: 'YB', name: 'Yossi Ben-David', time: 'Yesterday', prev: 'Great, thank you' },
+        { av: 'MA', name: 'Michal Amar', time: 'Mon', prev: 'Perfect 🙂' },
+      ],
+      chips: { a: ['Answered', 'Within a minute'], b: ['You were', 'On a job'] },
+      scenes: [
+        {
+          c: 0,
+          sub: 'Lead · Facebook',
+          tag: 'New lead',
+          prev: 'Hi Noa, thanks for reaching out…',
+          a: ['Answered', '41 seconds after the form'],
+          b: ['You were', 'Up a ladder'],
+          steps: [
+            { k: 'lead', d: 600, chip: 'Facebook lead form', time: 'Just now', name: 'Noa Cohen', detail: 'Interested in a home cleaning quote' },
+            { k: 'typing', d: 900 },
+            { k: 'out', d: 1500, who: 'Template', text: 'Hi Noa, thanks for reaching out! What day suits you for a quote visit?' },
+            { k: 'sys', d: 900, tone: 'ok', text: 'Sent 41 seconds after the form' },
+            { k: 'in', d: 1800, text: 'Thursday morning would be great' },
+          ],
+        },
+        {
+          c: 1,
+          sub: 'Customer',
+          tag: 'AI agent',
+          prev: 'Booked · Tue 14:00',
+          a: ['AI agent', 'Answered and booked'],
+          b: ['You were', 'With a client'],
+          steps: [
+            { k: 'in', d: 600, text: 'Hi! How much is a facial? Any slots tomorrow?' },
+            { k: 'typing', d: 900 },
+            { k: 'out', d: 1700, who: 'AI agent', text: 'A classic facial is ₪280. Tomorrow I have 10:30 or 14:00. Which works?' },
+            { k: 'in', d: 1600, text: '14:00 please' },
+            { k: 'typing', d: 700 },
+            { k: 'sys', d: 1000, tone: 'ok', text: 'Booked · Tue 14:00' },
+            { k: 'out', d: 900, who: 'AI agent', text: 'You’re booked for tomorrow at 14:00. See you!' },
+          ],
+        },
+        {
+          c: 2,
+          sub: 'Customer · AC service',
+          tag: 'Reminder',
+          prev: '1',
+          a: ['Reminder', 'Sent the day before'],
+          b: ['Confirmed', 'No call needed'],
+          steps: [
+            { k: 'sys', d: 600, text: 'Reminder · day before · 18:00' },
+            { k: 'out', d: 1000, who: 'Reminder', text: 'Hi Yossi, the technician arrives tomorrow at 9:00. Reply 1 to confirm or 2 to reschedule.' },
+            { k: 'in', d: 2200, text: '1' },
+            { k: 'sys', d: 900, tone: 'ok', text: 'Confirmed' },
+          ],
+        },
+      ],
+    },
     variants: {
       leads: {
         eyebrow: 'Lead management for Facebook, Instagram and your website',
@@ -98,7 +174,96 @@ export default {
     title: 'The work nobody pays you for',
     lede: 'Five jobs that eat your evenings. delaCRM does them for you, from your existing number, even while you’re working.',
     cta: 'Try it free',
-    note: TERMS,
+    note: 'No credit card · No commitment · ₪149/month incl. VAT',
+    stage: 'Live example',
+    /* One chat per item, played while that item is open. `at` is when a
+       message appears, in ms from the start; `off` is when it goes again;
+       `dur` is how long the item stays open before the next one. */
+    demos: [
+      {
+        dur: 9800,
+        av: 'DL', name: 'Dana Levi', sub: 'WhatsApp · Customer', tag: 'AI agent on',
+        msgs: [
+          { k: 'in', at: 300, text: 'How much is a facial?' },
+          { k: 'typing', at: 900, off: 2000 },
+          { k: 'out', at: 2000, who: 'AI agent', text: 'A classic facial is ₪280 and takes about an hour.' },
+          { k: 'in', at: 3000, text: 'Are you open on Friday?' },
+          { k: 'typing', at: 3500, off: 4400 },
+          { k: 'out', at: 4400, who: 'AI agent', text: 'Fridays 9:00–14:00. Want me to book you in?' },
+          { k: 'in', at: 5400, text: 'Can I bring my own serum?' },
+          { k: 'sys', at: 6300, tone: 'warn', text: 'Not sure · handed to you' },
+          { k: 'out', at: 7300, who: 'You', you: true, text: 'Of course, bring it along!' },
+          { k: 'sys', at: 8100, text: 'AI agent paused · you replied' },
+        ],
+      },
+      {
+        dur: 9000,
+        av: 'AC', name: 'Avi Cohen', sub: 'New lead', tag: 'Facebook',
+        msgs: [
+          { k: 'lead', at: 300, chip: 'Facebook lead form', time: 'Just now', name: 'Avi Cohen', detail: 'Kitchen renovation · Haifa' },
+          { k: 'sys', at: 1400, tone: 'ok', text: 'Sent 41 seconds after the form' },
+          { k: 'out', at: 1800, who: 'Template', text: 'Hi Avi, thanks for your request! When’s a good time for a quick call?' },
+          { k: 'vline', at: 3200 },
+          { k: 'sys', at: 3400, text: '2 days · no reply' },
+          { k: 'out', at: 4600, who: 'Follow-up', text: 'Hi Avi, just checking in. Still planning the kitchen?' },
+          { k: 'in', at: 6000, text: 'Yes! Tomorrow after 5?' },
+          { k: 'sys', at: 7000, tone: 'ok', text: 'Stage · New → Contacted' },
+        ],
+      },
+      {
+        dur: 9000,
+        av: 'MS', name: 'Maya Shapiro', sub: 'WhatsApp · Customer', tag: 'Calendar',
+        msgs: [
+          { k: 'out', at: 300, who: 'You', you: true, text: 'Pick a time that suits you 👇', link: 'delacrm.com/book/studio' },
+          {
+            k: 'slots', at: 1300, title: 'Pick a slot', note: 'Your hours',
+            days: ['Mon 13', 'Tue 14', 'Wed 15'], day: 1,
+            slots: ['09:00', '10:00', '11:30', '13:00', '15:30', '17:00'], taken: [0, 3], pick: 2, pickAt: 3000,
+          },
+          { k: 'sys', at: 4000, tone: 'ok', text: 'Booked · Tue 14 · 11:30' },
+          { k: 'in', at: 5300, text: 'Can we move it to Thursday?' },
+          { k: 'typing', at: 5900, off: 6800 },
+          { k: 'out', at: 6800, who: 'AI agent', text: 'Done. Moved to Thu 16 at 11:30. See you then!' },
+        ],
+      },
+      {
+        dur: 8800,
+        av: 'SR', name: 'Shira Rosen', sub: 'WhatsApp · Customer', tag: 'Reminders',
+        msgs: [
+          {
+            k: 'appt', at: 300, chip: 'Appointment', when: 'Tomorrow', name: 'Gel manicure · 10:00',
+            wait: 'Scheduled', done: 'Sent ✓',
+            rems: [
+              { at: 1300, label: 'Day before · 18:00' },
+              { at: 5600, label: '3 hours before · 07:00' },
+            ],
+          },
+          { k: 'out', at: 1700, who: 'Reminder', text: 'Hi Shira, see you tomorrow at 10:00. Reply 1 to confirm or 2 to reschedule.' },
+          { k: 'in', at: 3300, text: '1' },
+          { k: 'sys', at: 4100, tone: 'ok', text: 'Confirmed' },
+          { k: 'out', at: 6000, who: 'Reminder', text: 'See you at 10:00 today!' },
+        ],
+      },
+      {
+        dur: 9000,
+        av: 'BC', name: 'Before summer', sub: 'Broadcast · Past customers', tag: 'Opted in only',
+        msgs: [
+          { k: 'out', at: 300, who: 'Message', text: 'Hi {name}, time to service your AC before summer? Reply to book a slot.' },
+          {
+            k: 'recipients', at: 1300, title: 'Recipients', note: 'Opted in', sent: 'Sent', removed: 'Removed',
+            rows: [
+              { av: 'RG', name: 'Ron Gabay' },
+              { av: 'LK', name: 'Lior Katz' },
+              { av: 'EP', name: 'Eli Peretz', goneAt: 5600 },
+              { av: 'TM', name: 'Tamar Mizrahi' },
+            ],
+          },
+          { k: 'in', at: 3200, who: 'Ron', text: 'Yes, next week please' },
+          { k: 'in', at: 4500, who: 'Eli', text: 'stop' },
+          { k: 'sys', at: 5600, text: 'Eli taken off the list' },
+        ],
+      },
+    ],
     items: [
       {
         title: 'The same questions, twenty times a day',
@@ -140,6 +305,20 @@ export default {
       reply:
         'I built a draft: new conversation → analyse the conversation → if they ask for a quote: tag “hot” and assign to you. Switch it on?',
       caption: 'An example conversation with Claude',
+      app: 'Claude',
+      connected: 'delaCRM connected',
+      saved: 'Saved in delaCRM',
+      draft: 'Draft',
+      live: 'Live',
+      nodes: [
+        { k: 'Trigger', v: 'New conversation' },
+        { k: 'AI step', v: 'Analyse' },
+        { k: 'If', v: 'Asks for a quote' },
+        { k: 'Then', v: 'Tag “hot” · assign to you' },
+      ],
+      yes: 'Yes, switch it on',
+      done: 'Done. It’s live in delaCRM.',
+      placeholder: 'Reply to Claude…',
     },
     examples: [
       'On a customer’s birthday: a message with an offer',
@@ -148,7 +327,11 @@ export default {
     ],
     note: 'Claude and ChatGPT only work with you. They don’t contact customers on their own, and only send a message when you explicitly ask.',
     ways: {
+      label: '02 / Three ways to build',
       title: 'Three ways to build',
+      /* The faces on the "with us" card: two of us, then the reader. */
+      us: ['D', 'A'],
+      you: 'You',
       items: [
         {
           title: 'In the built-in editor',
@@ -192,16 +375,19 @@ export default {
         label: 'Step 1',
         title: 'Connect WhatsApp',
         body: 'Sign in with your business’s Facebook account and approve in the WhatsApp app on your phone. The number keeps working the whole time. Instagram and your Facebook Page connect the same way.',
+        demo: { button: 'Continue with Facebook', rows: ['WhatsApp connected', 'Number still works in the app'], live: 'Live' },
       },
       {
         label: 'Step 2',
         title: 'Bring in your customers',
         body: 'Upload a list from a spreadsheet, and the last 90 days of Facebook leads come in. You can also bring in recent conversations from the phone.',
+        demo: { file: 'customers.xlsx', kind: 'Spreadsheet', rows: ['Facebook leads · last 90 days', 'Recent conversations from the phone'] },
       },
       {
         label: 'Step 3',
         title: 'Choose what goes out on its own',
         body: 'A message for every new lead, a reminder before a visit, answers from the AI agent. Work with a partner or an employee? Invite them at no extra cost.',
+        demo: { toggles: ['Message every new lead', 'Reminder before a visit', 'AI agent answers'] },
       },
     ],
   },
@@ -248,6 +434,7 @@ export default {
   faq: {
     label: '06 / FAQ',
     title: 'What people ask before they start',
+    cta: { label: CHAT_LABEL, href: CHAT },
     items: [
       {
         q: 'How much does it cost?',
@@ -301,7 +488,7 @@ export default {
     title: 'Connect your number and see for yourself',
     lede: `Sign up free, connect WhatsApp, and set up an automatic message for every new lead today. Have a question first? Message us ${VIA}.`,
     primary: { label: 'Try it free', href: APP },
-    secondary: HAS_WHATSAPP ? { label: CHAT_LABEL, href: CHAT } : null,
+    secondary: { label: CHAT_LABEL, href: CHAT },
     note: TERMS,
   },
 

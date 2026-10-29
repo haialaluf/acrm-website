@@ -1,41 +1,19 @@
-import { useEffect, useState } from 'react'
 import LangToggle from './LangToggle.jsx'
 import { useCopy } from '../i18n/index.js'
 import { APP } from '../content/index.js'
 
-/** Width at which the inline links come back and the burger goes away. */
-const DESKTOP = 1010
-
+/**
+ * The bar across the top. Its colour follows the section under it, it gets a
+ * frosted background once the page scrolls, and a thin bar along its foot
+ * shows how far down the page you are; all of that, and the burger, is
+ * driven from behaviors.js.
+ */
 export default function Nav() {
   const { nav } = useCopy()
-  const [open, setOpen] = useState(false)
-  const [stuck, setStuck] = useState(false)
-
-  // The nav is transparent over the top of the hero and grows a rule once the
-  // page has scrolled under it.
-  useEffect(() => {
-    const onScroll = () => setStuck(window.scrollY > 0)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  useEffect(() => {
-    if (!open) return
-    const onKey = (e) => e.key === 'Escape' && setOpen(false)
-    const onResize = () => window.innerWidth > DESKTOP && setOpen(false)
-    document.addEventListener('keydown', onKey)
-    window.addEventListener('resize', onResize)
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      window.removeEventListener('resize', onResize)
-    }
-  }, [open])
-
   return (
-    <header className="nav" data-open={open ? '' : undefined} data-stuck={stuck ? '' : undefined}>
+    <header className="nav" id="nav" data-theme="dark">
       <div className="wrap nav-in">
-        <a className="brand" href="/">
+        <a className="brand" href="#top">
           <img src="/assets/delacrm-mark.png" alt="" />
           <span>delaCRM</span>
         </a>
@@ -48,46 +26,42 @@ export default function Nav() {
         </nav>
         <div className="nav-cta">
           <LangToggle />
-          <a className="nav-signin" href={APP}>
+          <a className="signin" href={APP}>
             {nav.signIn}
           </a>
-          <a className="btn btn-ghost btn-sm" href={nav.chatHref} data-cta="nav-whatsapp">
-            {nav.chatShort}
-          </a>
-          <a className="btn btn-primary btn-sm" href={APP} data-cta="nav-trial">
+          <a className="btn btn-solid btn-sm" href={APP} data-cta="nav-trial">
             {nav.trial}
           </a>
+          <button className="burger" id="burger" type="button" aria-label={nav.menu} aria-expanded="false">
+            <span />
+            <span />
+          </button>
         </div>
-        <button
-          className="nav-burger"
-          type="button"
-          aria-label={nav.menu}
-          aria-expanded={open}
-          aria-controls="m-menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
       </div>
-      <div className="m-menu" id="m-menu" onClick={() => setOpen(false)}>
+      <div className="m-menu" id="mmenu">
         {nav.links.map((l) => (
           <a href={l.href} key={l.href}>
-            {l.long || l.label}
+            {l.label}
           </a>
         ))}
-        <a className="btn btn-primary" href={APP} data-cta="menu-trial">
-          {nav.trial}
-        </a>
-        <a className="btn btn-ghost" href={nav.chatHref} data-cta="menu-whatsapp">
-          {nav.chat}
-        </a>
-        <a className="btn btn-ghost" href={APP}>
-          {nav.signIn}
-        </a>
-        <LangToggle className="lang-block" />
+        <a href={APP}>{nav.signIn}</a>
+        <LangToggle />
       </div>
+      <div className="nav-prog" id="prog" />
     </header>
+  )
+}
+
+/** One dot per section down the side of the page, named on hover. */
+export function Dots({ ids }) {
+  const { nav } = useCopy()
+  return (
+    <nav className="dots" id="dots" data-theme="dark">
+      {ids.map((id) => (
+        <a href={`#${id}`} key={id}>
+          <span>{nav.sections[id]}</span>
+        </a>
+      ))}
+    </nav>
   )
 }

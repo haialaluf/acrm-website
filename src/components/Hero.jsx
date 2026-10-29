@@ -1,74 +1,124 @@
-import { useEffect, useRef } from 'react'
-import Canvas from './Canvas.jsx'
-import { heroPointer } from '../anims/pointer.js'
-import { REDUCED } from '../reduced-motion.js'
-import { useLocale } from '../i18n/index.js'
+import { Split, Arrow, delay } from './bits.jsx'
+import { useCopy } from '../i18n/index.js'
 
+/**
+ * The headline beside a live inbox. behaviors.js plays the inbox's scenes
+ * into `#msgs` and floats the two chips beside it.
+ */
 export default function Hero() {
-  const { t, dir } = useLocale()
+  const t = useCopy()
   // ?v=<key> swaps in the headline written for one ad group, so the page a
   // visitor lands on continues the ad they clicked.
   const variant = new URLSearchParams(window.location.search).get('v')
   const hero = { ...t.hero, ...t.hero.variants?.[variant] }
-  const stage = useRef(null)
-
-  // Feeds the cursor position to the flow animation, which drifts the whole
-  // scene a few pixels towards it. Right-to-left mirrors the canvas in CSS, so
-  // the horizontal reading has to be mirrored with it to keep the drift
-  // following the cursor rather than running away from it.
-  useEffect(() => {
-    const el = stage.current
-    if (!el || REDUCED) return
-    const flip = dir === 'rtl' ? -1 : 1
-
-    const rest = () => {
-      heroPointer.x = 0
-      heroPointer.y = 0
-      heroPointer.on = false
-    }
-    const onMove = (e) => {
-      const r = el.getBoundingClientRect()
-      heroPointer.x = ((e.clientX - r.left) / r.width - 0.5) * 2 * flip
-      heroPointer.y = ((e.clientY - r.top) / r.height - 0.5) * 2
-      heroPointer.on = true
-    }
-
-    el.addEventListener('pointermove', onMove, { passive: true })
-    el.addEventListener('pointerleave', rest, { passive: true })
-    return () => {
-      el.removeEventListener('pointermove', onMove)
-      el.removeEventListener('pointerleave', rest)
-      rest()
-    }
-  }, [dir])
+  const dv = hero.device
+  const first = dv.convs[0]
 
   return (
-    <section className="stage" ref={stage}>
-      <Canvas anim="flow" />
-      <div className="stage-veil" aria-hidden="true" />
-      <div className="wrap stage-in">
-        {/* No reveal here: the hero is the first thing on screen, and text
-            that waits on a script to fade in reads as an empty page. */}
+    <section className="screen dk hero" id="top" data-theme="dark">
+      <div className="hero-bg">
+        <div className="glow" />
+      </div>
+      <div className="wrap hero-grid">
         <div className="hero-copy">
-          <div className="eyebrow mono">
-            <span className="dot" />
-            {hero.eyebrow}
+          <div className="eyebrow mono" data-rv="">
+            <span className="pulse" />
+            <span>{hero.eyebrow}</span>
           </div>
-          <h1>{hero.title}</h1>
-          <p className="stage-sub">{hero.lede}</p>
-          <div className="hero-actions">
-            <a className="btn btn-light" href={hero.primary.href} data-cta="hero-trial">
-              {hero.primary.label}
+          <Split as="h1" className={null} text={hero.title} />
+          <p className="hero-lede" data-rv="" style={delay('.35s')}>
+            {hero.lede}
+          </p>
+          <div className="actions" data-rv="" style={delay('.5s')}>
+            <a className="btn btn-solid" href={hero.primary.href} data-cta="hero-trial">
+              {hero.primary.label} <Arrow />
             </a>
             {hero.secondary && (
-              <a className="btn btn-dark-ghost" href={hero.secondary.href} data-cta="hero-whatsapp">
+              <a className="btn btn-line" href={hero.secondary.href} data-cta="hero-whatsapp">
                 {hero.secondary.label}
               </a>
             )}
           </div>
-          {hero.note && <p className="hero-note">{hero.note}</p>}
+          <p className="hero-note" data-rv="" style={delay('.6s')}>
+            {hero.note}
+          </p>
+        </div>
+        <div className="dv-wrap" data-rv="" style={delay('.3s')}>
+          <div className="device" id="device">
+            <div className="dv-top">
+              <span className="dv-dots">
+                <i />
+                <i />
+                <i />
+              </span>
+              <span className="dv-title">{dv.title}</span>
+              <span className="dv-status">
+                <span className="pulse" />
+                {dv.status}
+              </span>
+            </div>
+            <div className="dv-body">
+              <aside className="dv-list" id="convs">
+                <div className="dv-search">{dv.search}</div>
+                {dv.convs.map((c) => (
+                  <div className="conv" key={c.name}>
+                    <span className="av">{c.av}</span>
+                    <b>{c.name}</b>
+                    <small>{c.time}</small>
+                    <p>{c.prev}</p>
+                    <span className="badge">1</span>
+                  </div>
+                ))}
+              </aside>
+              <section className="dv-thread">
+                <div className="th-head">
+                  <span className="av" id="th-av">
+                    {first.av}
+                  </span>
+                  <div>
+                    <b id="th-name">{first.name}</b>
+                    <small id="th-sub">{first.sub}</small>
+                  </div>
+                  <span className="th-tag" id="th-tag">
+                    {first.tag}
+                  </span>
+                </div>
+                <div className="msgs" id="msgs" />
+                <div className="th-input">
+                  {dv.input}
+                  <span className="send" />
+                </div>
+              </section>
+            </div>
+          </div>
+          <Chip id="chipA" side="a" kv={dv.chips.a} />
+          <Chip id="chipB" side="b" kv={dv.chips.b} />
+        </div>
+      </div>
+      <div className="wrap">
+        <div className="rail" data-rv="" style={delay('.7s')}>
+          {t.facts.map((f) => (
+            <div key={f.title}>
+              <h4>
+                {f.title} {f.mark && <span className="meta-mark">{f.mark}</span>}
+              </h4>
+              <p>{f.body}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
+  )
+}
+
+function Chip({ id, side, kv }) {
+  return (
+    <div className={`fchip fchip-${side} hide`} id={id}>
+      <span className="ic" />
+      <div>
+        <small id={`${id}-k`}>{kv[0]}</small>
+        <span id={`${id}-v`}>{kv[1]}</span>
+      </div>
+    </div>
   )
 }

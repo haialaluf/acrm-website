@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="wrap">
         <div className="f-grid">
           <div>
-            <a className="brand" href="/" style={{ color: '#fff' }}>
+            <a className="brand" href="#top">
               <img src="/assets/delacrm-mark.png" alt="" />
               <span>delaCRM</span>
             </a>
@@ -18,7 +18,7 @@ export default function Footer() {
             <div key={col.title}>
               <h4>{col.title}</h4>
               {col.links.map((l) => (
-                <a href={l.href} key={l.href}>
+                <a href={l.href} key={l.href + l.label}>
                   {l.label}
                 </a>
               ))}
@@ -26,7 +26,7 @@ export default function Footer() {
           ))}
         </div>
         <div className="f-bottom">
-          <div>{footer.copyright(new Date().getFullYear())}</div>
+          <span>{footer.copyright(new Date().getFullYear())}</span>
           <p>{footer.disclaimer}</p>
         </div>
       </div>
