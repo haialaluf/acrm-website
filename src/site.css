@@ -456,8 +456,8 @@ html{scroll-snap-type:none}
 .nav.open .btn-solid{background:var(--ink)!important;color:var(--paper)!important}
 .m-menu a{display:flex;align-items:center;min-height:52px;font-size:17px;color:var(--ink);border-bottom:1px solid var(--rule-2)}
 .m-menu a:last-child{border-bottom:0}
-.screen{padding:calc(var(--nav) + 48px) 0 56px}
-.hero{padding-bottom:0}
+.screen{padding:56px 0;scroll-margin-top:var(--nav)}
+.hero{padding:calc(var(--nav) + 48px) 0 0}
 .screen>.hero-grid{gap:40px}
 .dv-wrap{margin-top:8px}
 .device{height:460px}
@@ -476,7 +476,7 @@ html{scroll-snap-type:none}
 .sc-vis{height:200px}
 .qa .ans p{padding-inline-end:0}
 .qa button{padding:16px 0;font-size:16.5px}
-.cta{padding-top:calc(var(--nav) + 64px)}
+.cta{padding-top:72px}
 .cta-c .h2{font-size:clamp(36px,10vw,56px)}
 footer{margin-top:64px}
 }
