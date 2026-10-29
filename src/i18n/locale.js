@@ -1,102 +1,60 @@
 /**
- * Which language the visitor gets, and how we work it out.
+ * Which language a page is in, and where the other one lives.
  *
- * The rule is "Israel gets Hebrew, everyone else gets English". A browser
- * cannot tell us where somebody is without asking permission first — the
- * Geolocation API shows a prompt, and a marketing page that opens with one is
- * a page people close — so we read the two signals the browser hands over for
- * free: the machine's time zone, and the languages it says it prefers.
+ * Each language has its own address, English at `/` and Hebrew at `/he/`,
+ * because search engines index one language per URL: a page that rewrites
+ * itself after load only ever gets indexed in whatever the crawler happened
+ * to be shown. So the address decides the language, and picking the right
+ * address for a visitor ("Israel gets Hebrew") happens before the page paints,
+ * in the small script at the top of index.html.
  */
 
 export const LOCALES = ['en', 'he']
 export const DEFAULT_LOCALE = 'en'
 
+/** Read by the script in index.html too; keep the two in step. */
 const STORE_KEY = 'delacrm.locale'
 
-/** Israel is one zone, but browsers and older ICU data still return aliases. */
-const IL_ZONES = new Set(['Asia/Jerusalem', 'Asia/Tel_Aviv', 'Israel'])
+/** Where each language's page lives. */
+export const PATHS = { en: '/', he: '/he/' }
 
-const isLocale = (v) => LOCALES.includes(v)
+/** The language of the page at `pathname`. */
+export const localeFromPath = (pathname) =>
+  /^\/he(\/|$)/.test(pathname) ? 'he' : DEFAULT_LOCALE
 
-/** `?lang=he` — so a link can pin the language regardless of where it's opened. */
-function fromQuery() {
-  try {
-    const v = new URLSearchParams(window.location.search).get('lang')
-    return isLocale(v) ? v : null
-  } catch {
-    return null
-  }
+/** Which language this page is in. */
+export function detectLocale() {
+  if (typeof window === 'undefined') return DEFAULT_LOCALE
+  return localeFromPath(window.location.pathname)
 }
 
-/** A choice the visitor made themselves always beats anything we detect. */
-export function readStored() {
-  try {
-    const v = localStorage.getItem(STORE_KEY)
-    return isLocale(v) ? v : null
-  } catch {
-    // Private mode, or storage blocked. Detection still works.
-    return null
-  }
-}
-
+/** A choice the visitor made themselves beats anything the script detects. */
 export function writeStored(locale) {
   try {
     localStorage.setItem(STORE_KEY, locale)
   } catch {
     /* nothing we can do, and nothing worth breaking the page over */
   }
-  // A `?lang=` already in the address bar outranks storage on the next load,
-  // so it has to move with the choice or it would quietly undo it. A URL
-  // without one is left clean.
-  try {
-    const url = new URL(window.location.href)
-    if (url.searchParams.has('lang')) {
-      url.searchParams.set('lang', locale)
-      window.history.replaceState(null, '', url)
-    }
-  } catch {
-    /* history is not worth breaking the page over either */
-  }
-}
-
-/** Where they are: the time zone is the only location the browser gives freely. */
-function fromTimeZone() {
-  try {
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
-    return tz && IL_ZONES.has(tz) ? 'he' : null
-  } catch {
-    return null
-  }
 }
 
 /**
- * What they read: `he`/`iw` (the legacy Hebrew tag) anywhere in the preference
- * list, or an `-IL` region on any tag — an Israeli phone set to English still
- * reports `en-IL`.
+ * The same page in `locale`, keeping the query (ad parameters, `?v=`) and the
+ * section. A `?lang=` would pin the old language again, so it is dropped.
  */
-function fromLanguages() {
-  const tags = navigator.languages?.length ? navigator.languages : [navigator.language]
-  for (const raw of tags) {
-    const tag = String(raw || '').toLowerCase()
-    if (tag.startsWith('he') || tag.startsWith('iw')) return 'he'
-    if (tag.endsWith('-il')) return 'he'
-  }
-  return null
-}
-
-/** First signal to answer wins. */
-export function detectLocale() {
-  if (typeof window === 'undefined') return DEFAULT_LOCALE
-  return (
-    fromQuery() || readStored() || fromTimeZone() || fromLanguages() || DEFAULT_LOCALE
-  )
+export function hrefFor(locale) {
+  if (typeof window === 'undefined') return PATHS[locale]
+  const params = new URLSearchParams(window.location.search)
+  params.delete('lang')
+  const q = params.toString()
+  return PATHS[locale] + (q ? `?${q}` : '') + window.location.hash
 }
 
 export const dirOf = (locale) => (locale === 'he' ? 'rtl' : 'ltr')
 
 /**
  * Puts the language on <html> — `dir` drives every logical property in the
- * stylesheet, so this one attribute is what actually flips the layout.
+ * stylesheet, so this one attribute is what actually flips the layout. The
+ * prerendered page already has all of this; it matters in `vite dev`.
  */
 export function applyDocumentLocale(locale, meta) {
   const el = document.documentElement

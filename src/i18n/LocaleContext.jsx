@@ -1,25 +1,14 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { applyDocumentLocale, detectLocale, dirOf, writeStored } from './locale.js'
+import { createContext, useContext, useEffect, useMemo } from 'react'
+import { applyDocumentLocale, dirOf } from './locale.js'
 import { copy } from '../content/index.js'
 
 const Ctx = createContext(null)
 
-export function LocaleProvider({ initial = detectLocale(), children }) {
-  const [locale, setLocale] = useState(initial)
+/** The language is fixed per page; switching it is a link to the other page. */
+export function LocaleProvider({ initial, children }) {
+  const locale = initial
 
-  const value = useMemo(
-    () => ({
-      locale,
-      dir: dirOf(locale),
-      t: copy[locale],
-      /** Switching is a deliberate act, so it is remembered from here on. */
-      setLocale: (next) => {
-        writeStored(next)
-        setLocale(next)
-      },
-    }),
-    [locale],
-  )
+  const value = useMemo(() => ({ locale, dir: dirOf(locale), t: copy[locale] }), [locale])
 
   useEffect(() => {
     applyDocumentLocale(locale, value.t.meta)

@@ -509,8 +509,8 @@ export default {
       {
         title: 'Legal',
         links: [
-          { href: 'privacy.html', label: 'Privacy policy' },
-          { href: 'data-deletion.html', label: 'Data deletion' },
+          { href: '/privacy.html', label: 'Privacy policy' },
+          { href: '/data-deletion.html', label: 'Data deletion' },
         ],
       },
       {

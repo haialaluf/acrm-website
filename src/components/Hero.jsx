@@ -8,8 +8,10 @@ import { useCopy } from '../i18n/index.js'
 export default function Hero() {
   const t = useCopy()
   // ?v=<key> swaps in the headline written for one ad group, so the page a
-  // visitor lands on continues the ad they clicked.
-  const variant = new URLSearchParams(window.location.search).get('v')
+  // visitor lands on continues the ad they clicked. The prerendered page is
+  // always the default one; main.jsx redraws rather than hydrates for a `v`.
+  const variant =
+    typeof window === 'undefined' ? null : new URLSearchParams(window.location.search).get('v')
   const hero = { ...t.hero, ...t.hero.variants?.[variant] }
   const dv = hero.device
   const first = dv.convs[0]

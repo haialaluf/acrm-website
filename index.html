@@ -3,19 +3,47 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>delaCRM | WhatsApp for one-person businesses: lead replies, reminders and an AI agent</title>
-  <meta name="description" content="delaCRM answers leads and customers on WhatsApp and sends reminders and follow-ups, from your existing number over the official connection. Need another process? Describe it to Claude or ChatGPT. Launch price ₪149/month incl. VAT. Try it free." />
+  <script>
+    /* Sends a visitor to their language's page before anything paints.
+       Israel gets Hebrew, everyone else English: a `?lang=` in the link wins,
+       then a choice they made with the toggle (i18n/locale.js stores it),
+       then, only on the English home page, the two signals the browser gives
+       for free, its time zone and its preferred languages. Crawlers carry
+       none of these, so each sees the page it asked for. */
+    (function () {
+      var path = location.pathname
+      var here = /^\/he(\/|$)/.test(path) ? 'he' : 'en'
+      var ok = function (v) { return v === 'en' || v === 'he' ? v : null }
+      var want = ok(new URLSearchParams(location.search).get('lang'))
+      if (!want) try { want = ok(localStorage.getItem('delacrm.locale')) } catch (e) {}
+      if (!want && path === '/') {
+        try {
+          var tz = Intl.DateTimeFormat().resolvedOptions().timeZone
+          if (tz === 'Asia/Jerusalem' || tz === 'Asia/Tel_Aviv' || tz === 'Israel') want = 'he'
+        } catch (e) {}
+        // `iw` is the legacy Hebrew tag; an Israeli phone set to English still says `en-IL`.
+        var tags = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]
+        for (var i = 0; !want && i < tags.length; i++) {
+          var tag = String(tags[i] || '').toLowerCase()
+          if (/^(he|iw)/.test(tag) || /-il$/.test(tag)) want = 'he'
+        }
+      }
+      if (want && want !== here) location.replace((want === 'he' ? '/he/' : '/') + location.search + location.hash)
+    })()
+  </script>
+  <!--seo-->
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#F7F5EE" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Heebo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
 </head>
 <body>
-  <div id="root"></div>
+  <div id="root"><!--app--></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>

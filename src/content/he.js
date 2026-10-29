@@ -523,8 +523,8 @@ export default {
       {
         title: 'משפטי',
         links: [
-          { href: 'privacy.html', label: 'מדיניות פרטיות' },
-          { href: 'data-deletion.html', label: 'מחיקת מידע' },
+          { href: '/privacy.html', label: 'מדיניות פרטיות' },
+          { href: '/data-deletion.html', label: 'מחיקת מידע' },
         ],
       },
       {
